@@ -32,7 +32,7 @@ var RenderEngine = function () {
     }
 
     function drawHUD(character) {
-      if (!character.hp < 500) {
+      if (character.hp < 500 || character.hpBuffer < 150) {
         if (character.hp > 250) {
           ctx.fillStyle = "#ADFF2F";
         } else if (character.hp > 100) {

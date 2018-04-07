@@ -18,6 +18,7 @@ class Character {
     }
 
     this.hp = 500;
+    this.hpBuffer = 150;
 
     this.height = GRID_SIZE * 2;
     this.width = GRID_SIZE;
@@ -77,10 +78,13 @@ class Character {
         this.velocity.y += (this.gravity - this.velocity.y) * 0.015;
     }
 
-    if (isHurt(level, this.position.x, this.position.y + this.height + 0.1) || isHurt(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
+    if (isHurt(level, this.position.x + 10, this.position.y + this.height - 10) || isHurt(level, this.position.x + this.width - 10, this.position.y + this.height - 10)) {
         this.hp -= 3;
+        this.hpBuffer = 0;
     } else if (this.hp < 500) {
         this.hp += 1;
+    } else if (this.hpBuffer < 150) {
+        this.hpBuffer += 1;
     }
 
 }
