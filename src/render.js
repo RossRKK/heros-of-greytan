@@ -55,11 +55,8 @@ var RenderEngine = function () {
             ctx.fillStyle =  "#ADFF2F";
             ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (0.5));
         }
-<<<<<<< HEAD
         ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
         }
-=======
->>>>>>> d43a6dc1ee44ec4e99aa3c8e62e1b675dfbc263a
     }
 
     function drawLevel(level) {
