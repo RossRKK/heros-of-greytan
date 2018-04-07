@@ -80,7 +80,7 @@ var Game = function () {
       if (!keyTracker.up && !keyTracker.down) {
         character.accelerate("VERTICAL");
       }
-      character.move();
+      character.move(level);
 
       // RenderEngine.render(character, level);
 
