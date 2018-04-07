@@ -103,7 +103,8 @@ var RenderEngine = function () {
         init: init,
         render: render,
         getTranX: function () { return tranX },
-        getTranY: function () { return tranY }
+        getTranY: function () { return tranY },
+        drawDeath: drawDeath
     }
 }();
 RenderEngine.init();
