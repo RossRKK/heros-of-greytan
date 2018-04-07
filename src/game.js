@@ -55,22 +55,22 @@ var Game = function () {
   function update() {
       let keyTracker = Events.getKeyTracker();
       if (keyTracker.left) {
-          character.accelerate("LEFT");
+          character.accelerate("LEFT", level);
       }
       if (keyTracker.right) {
-          character.accelerate("RIGHT");
+          character.accelerate("RIGHT", level);
       }
       if (!keyTracker.left && !keyTracker.right) {
-          character.accelerate("HORIZONTAL");
+          character.accelerate("HORIZONTAL", level);
       }
       if (keyTracker.up) {
-          character.accelerate("UP");
+          character.accelerate("UP", level);
       }
       if (keyTracker.down) {
-          character.accelerate("DOWN");
+          character.accelerate("DOWN", level);
       }
       if (!keyTracker.up && !keyTracker.down) {
-        character.accelerate("VERTICAL");
+        character.accelerate("VERTICAL", level);
       }
       character.move(level);
 
