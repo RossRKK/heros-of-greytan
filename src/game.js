@@ -19,14 +19,19 @@ var Game = function () {
 
   let level = {
     background: "#68a2ff",
-    grid: [[tower, tower, tower, grass],
-           [null, null, null, null, grass],
-           [null, null, null, null, grass],
-           [null, null, tree, null, grass],
-           [null, null, null, null, grass],
-           [null, null, null, null, grass],
-           [null, null, null, null, water],
-           [null, null, null, null, water]]
+    grid: [[null, null, null, tower, tower, tower, grass],
+           [null, null, null, null, null, null, grass],
+           [null, null, null, null, null, null, grass],
+           [null, null, null, null, null, grass, grass],
+           [null, null, null, null, tree, grass, grass],
+           [null, null, null, null, null, grass, grass],
+           [null, null, null, null, null, null, grass],
+           [null, null, null, null, null, null, grass],
+           [null, null, null, null, null, null, grass],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water]]
   }
 
   let adjectives = [
