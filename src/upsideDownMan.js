@@ -12,10 +12,10 @@ class upsideDownMan extends Character {
 	}
 
 	action() {
-		this.engaged = true;
-		if (this.engaged) {
+		if (!this.engaged) {
 			this.gravity = -this.gravity;
 		}
+		this.engaged = true;
 
 		if (this.engaged) {this.img.src = "textures/BobUpsideDownUpsideDown.png";}
 		// else {this.img.src = "textures/BobUpsideDown.png";}
