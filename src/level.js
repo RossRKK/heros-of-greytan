@@ -1,6 +1,6 @@
 class GridCell {
 
-    constructor (background, imgSrc, isSolid, mask, isKillBlock) {
+    constructor (background, imgSrc, isSolid, isKillBlock) {
     this.background = background;
 
     this.img = document.createElement("img");
@@ -8,7 +8,6 @@ class GridCell {
 
     this.isSolid = isSolid;
     this.isKillBlock = isKillBlock;
-    this.mask = mask;
   }
 
   //draw the grid cell
@@ -49,5 +48,36 @@ function isHurt(level, x, y) {
         return level.grid[gridX][gridY] ? level.grid[gridX][gridY].isKillBlock : false;
     } else {
         return undefined;
+    }
+}
+
+class MaskCell extends GridCell {
+    constructor(background, isSolid, isKillBlock, mask) {
+        super(background, null, isSolid, isKillBlock);
+        this.img = document.createElement("img");
+
+        this.setMask(mask);
+    }
+
+    setMask(mask) {
+        this.mask = mask;
+        switch (mask) {
+            case "UDM":
+                this.img.src = "textures/upsideDownManHigh.png";
+                break;
+            case "SM":
+                this.img.src = "textures/speedBoiHigh.png";
+                break;
+            default:
+                this.img.src = null;
+        }
+    }
+
+    //draw the grid cell
+    draw(ctx, x, y) {
+        //draw an image if it's available
+        if (this.mask !== null) {
+          ctx.drawImage(this.img, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+        }
     }
 }

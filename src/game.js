@@ -12,11 +12,12 @@ var Game = function () {
 
   let name;
 
-  grass = new GridCell("green", "textures/grass2.png", true, "none", false);
-  water = new GridCell("green", "textures/water.png", false, "none", true);
-  tower = new GridCell("green", "textures/tower.png", true, "none", false);
-  tree = new GridCell("#68a2ff", "textures/tree.png", true, "none", false);
-  upsideDownMask = new GridCell("#68a2ff", "textures/upsideDownManHigh.png", false, "UDM", false);
+  grass = new GridCell("green", "textures/grass2.png", true, false);
+  water = new GridCell("green", "textures/water.png", false, true);
+  tower = new GridCell("green", "textures/tower.png", true, false);
+  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+  upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
+  speedMask = new MaskCell("#68a2ff", false, false, "SM");
 
   let level = {
     background: "#68a2ff",
@@ -32,7 +33,7 @@ var Game = function () {
            [null, null, null, null, null, null, water],
            [null, null, null, null, null, null, water],
            [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water]]
+           [speedMask, null, null, null, null, null, water]]
   }
 
   let adjectives = [
@@ -103,11 +104,40 @@ var Game = function () {
       return false;
   }
 
+  let canSwap = true;
+
+  function switchMask(level, character) {
+      tile = getTile(level, character.position.x, character.position.y);
+
+      if (tile && canSwap) {
+          switch (tile.mask) {
+            case "UDM":
+                swap(tile, character);
+                return new upsideDownMan(character);
+            case "SM":
+                swap(tile, character);
+                return new speedMan(character);
+            default:
+                return character;
+          }
+      } else {
+          return character;
+      }
+  }
+
+  function swap(tile, character) {
+      tile.setMask(character.mask);
+      canSwap = false;
+
+      setTimeout(function(){canSwap = true}, 1000);
+  }
+
   //update the state of the game
   function update() {
       let keyTracker = Events.getKeyTracker();
       character.updatePosition(keyTracker, level);
       character.move(level);
+      character = switchMask(level, character);
 
       // RenderEngine.render(character, level);
 
