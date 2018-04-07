@@ -14,6 +14,8 @@ class Character {
       x = 0,
       y = 0
     }
+
+    this.hp = 10;
   }
 
   //move add velocity to the character in the given direction
