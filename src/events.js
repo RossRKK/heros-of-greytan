@@ -4,41 +4,48 @@ var Events = function () {
 		up: false,
 		down: false,
 		left: false,
-		right: false
+		right: false,
+		shift: false
 	}
 
 	function keyDown(e) {
 		console.log(e);
-		switch (e.originalEvent.key) {
-			case "w":
+		switch (e.keyCode) {
+			case 87:
 				keyTracker.up = true;
 				break;
-			case "a":
+			case 65:
 				keyTracker.left = true;
 				break;
-			case "s":
+			case 83:
 				keyTracker.down = true;
 				break;
-			case "d":
+			case 68:
 				keyTracker.right = true;
+				break;
+			case 16:
+				keyTracker.shift = true;
 				break;
 		}
 	}
 
 	function keyUp(e) {
 		console.log(e);
-		switch (e.originalEvent.key) {
-			case "w":
+		switch (e.keyCode) {
+			case 87:
 				keyTracker.up = false;
 				break;
-			case "a":
+			case 65:
 				keyTracker.left = false;
 				break;
-			case "s":
+			case 83:
 				keyTracker.down = false;
 				break;
-			case "d":
+			case 68:
 				keyTracker.right = false;
+				break;
+			case 16:
+				keyTracker.shift = false;
 				break;
 		}
 	}

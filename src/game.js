@@ -18,13 +18,13 @@ var Game = function () {
   let level = {
     background: "#68a2ff",
     grid: [[tower, tower, tower, grass],
-           [null, null, null, grass],
-           [null, null, null, grass],
-           [null, null, tree, grass],
-           [null, null, null, grass],
-           [null, null, null, grass],
-           [null, null, null, water],
-           [null, null, null, water]]
+           [null, null, null, null, grass],
+           [null, null, null, null, grass],
+           [null, null, tree, null, grass],
+           [null, null, null, null, grass],
+           [null, null, null, null, grass],
+           [null, null, null, null, water],
+           [null, null, null, null, water]]
   }
 
   //generate the name of the game
@@ -62,24 +62,7 @@ var Game = function () {
   //update the state of the game
   function update() {
       let keyTracker = Events.getKeyTracker();
-      if (keyTracker.left) {
-          character.accelerate("LEFT", level);
-      }
-      if (keyTracker.right) {
-          character.accelerate("RIGHT", level);
-      }
-      if (!keyTracker.left && !keyTracker.right) {
-          character.accelerate("HORIZONTAL", level);
-      }
-      if (keyTracker.up) {
-          character.accelerate("UP", level);
-      }
-      if (keyTracker.down) {
-          character.accelerate("DOWN", level);
-      }
-      if (!keyTracker.up && !keyTracker.down) {
-        character.accelerate("VERTICAL", level);
-      }
+      character.updatePosition(keyTracker, level);
       character.move(level);
 
       // RenderEngine.render(character, level);

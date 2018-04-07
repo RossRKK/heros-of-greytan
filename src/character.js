@@ -3,7 +3,7 @@ class Character {
   constructor () {
     this.horizontalMaxSpeed = 5;
     this.verticalMaxSpeed = 6;
-    this.gravity = 9.8;
+    this.gravity = 18;
 
     //Velocity = Length moved/game loop length
     this.velocity = {
@@ -25,35 +25,52 @@ class Character {
 
   //Game loops every 0.1 secs
   //Accelerates to full speed from nothing in 1 seconds
-  accelerate(dir, level) {
-      switch (dir) {
-        case "LEFT":
-        if (this.velocity.x > -this.horizontalMaxSpeed) {
-            this.velocity.x--;
-        }
-        break;
-        case "RIGHT":
-        if (this.velocity.x < this.horizontalMaxSpeed) {
-            this.velocity.x++;
-        }
-        break;
-        case "UP":
-        if (isObstructed(level, this.position.x, this.position.y + this.height + 0.1) || isObstructed(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
-            this.velocity.y = -this.verticalMaxSpeed;
+  updatePosition(keyTracker, level) {
+
+    if (keyTracker.left) {
+        if (!keyTracker.shift) {
+            if (this.velocity.x > -this.horizontalMaxSpeed) {
+                this.velocity.x--;
+            }
         } else {
-            this.velocity.y = this.velocity.y + (this.gravity - this.velocity.y) * 0.02;
+            if (this.velocity.x > -this.horizontalMaxSpeed - 2) {
+                this.velocity.x -= 0.5;
+            }
         }
-        break;
-        case "DOWN":
-        if (this.velocity.y < this.horizontalMaxSpeed) {
-            this.velocity.y++;
+    }
+
+    if (keyTracker.right) {
+        if (!keyTracker.shift) {
+            if (this.velocity.x < this.horizontalMaxSpeed) {
+                this.velocity.x++;
+            }
+        } else {
+            if (this.velocity.x < this.horizontalMaxSpeed + 2) {
+            this.velocity.x += 0.5;
+            }
+        }  
+    }
+
+    if (!keyTracker.left && !keyTracker.right) {
+        this.velocity.x *= 0.5;
+    }
+
+    if (keyTracker.up) {
+        if (!keyTracker.down) {
+            if (isObstructed(level, this.position.x, this.position.y + this.height + 0.1) || isObstructed(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
+                this.velocity.y = -this.verticalMaxSpeed;
+            } else {
+                this.velocity.y += (this.gravity - this.velocity.y) * 0.0075;
+            }
         }
-        case "HORIZONTAL":
-        this.velocity.x = 0.5 * this.velocity.x;
-        break;
-        case "VERTICAL":
-        this.velocity.y = this.velocity.y + (this.gravity - this.velocity.y) * 0.05;
-        break;
+    }
+
+    if (keyTracker.down) {
+        this.velocity.y += (this.gravity - this.velocity.y) * 0.02;
+    }
+    
+    if (!keyTracker.up && !keyTracker.down) {
+        this.velocity.y += (this.gravity - this.velocity.y) * 0.015;
     }
 
 }
