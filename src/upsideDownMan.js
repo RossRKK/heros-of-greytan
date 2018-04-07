@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-class upsideDownMan extends character {
-
-=======
 class upsideDownMan extends Character {
 	constructor(oldCharacter) {
 		super();
@@ -35,5 +31,4 @@ class speedMan extends Character {
 		this.img.src = "textures/BobSpeed.png";
 		this.engaged = false;
 	}
->>>>>>> 92511bdd1ef42f82eaf5fdc70e432df55eb4761b
 }
