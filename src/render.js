@@ -32,16 +32,24 @@ var RenderEngine = function () {
     }
 
     function drawHUD(character) {
-      if (character.hp < 500 || character.hpBuffer < 150) {
-        if (character.hp > 250) {
-          ctx.fillStyle = "#ADFF2F";
-        } else if (character.hp > 100) {
-          ctx.fillStyle = "#FF4500";
-        } else {
-          ctx.fillStyle = "#000000";
+        if (character.hp < 500 || character.hpBuffer < 150) {
+            if (character.hp > 250) {
+              ctx.fillStyle = "#ADFF2F";
+            } else if (character.hp > 100) {
+              ctx.fillStyle = "#FF4500";
+            } else {
+              ctx.fillStyle = "#000000";
+            }
+            ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
         }
-        ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
-    }
+        if (character.engaged && character.mask !== null) {
+            ctx.fillStyle = "#FF4500";
+            ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (0.5));
+        }
+        else if (!character.engaged && character.mask !== null) {
+            ctx.fillStyle =  "#ADFF2F";
+            ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (0.5));
+        }
     }
 
     function drawLevel(level) {
