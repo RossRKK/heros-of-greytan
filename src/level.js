@@ -24,5 +24,9 @@ function isObstructed(level, x, y) {
     let gridX = Math.floor(x / GRID_SIZE);
     let gridY = Math.floor(y / GRID_SIZE);
 
-    return level.grid[gridX][gridY] ? level.grid[gridX][gridY].solid : false;
+    if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
+        return level.grid[gridX][gridY] ? level.grid[gridX][gridY].solid : false;
+    } else {
+        return true;
+    }
 }

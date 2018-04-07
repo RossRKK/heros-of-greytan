@@ -59,16 +59,23 @@ class Character {
 
   //move adds velocity to the character in the given direction
   move(level) {
-      this.position.x += this.velocity.x;
+      //this.position.x += this.velocity.x;
 
       let x = this.position.x + this.velocity.x;
       let y = this.position.y + this.velocity.y;
 
-      if (!isObstructed(level, x, y) && !isObstructed(level, x + this.width, y)
-        && !isObstructed(level, x, y + this.height) && !isObstructed(level, x + this.width, y + this.height)) {
+      if (!isObstructed(level, x + (this.width / 2), y) && !isObstructed(level, x + (this.width / 2), y + this.height)) {
           this.position.y = y;
       } else {
           this.position.y = Math.round(y/GRID_SIZE) * GRID_SIZE;
+          this.velocity.y = 0;
+      }
+
+      if (!isObstructed(level, x, y + (this.height / 2)) && !isObstructed(level, x + this.width, y + (this.height / 2))) {
+          this.position.x = x;
+      } else {
+          this.position.x = Math.round(x/GRID_SIZE) * GRID_SIZE;
+          this.velocity.x = 0;
       }
   }
 
