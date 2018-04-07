@@ -11,15 +11,23 @@ var Game = function () {
   let character;
 
   grass = new GridCell("green", "textures/grass.png");
+  water = new GridCell("green", "textures/water.png");
+  tower = new GridCell("green", "textures/tower.png");
+  tree = new GridCell("#68a2ff", "textures/tree.png");
 
   let level = {
     background: "#68a2ff",
-    grid: [[null, grass],
-           [null, grass],
-           [null, grass]]
+    grid: [[tower, tower, tower, grass],
+           [null, null, null, grass],
+           [null, null, null, grass],
+           [null, null, tree, grass],
+           [null, null, null, grass],
+           [null, null, null, grass],
+           [null, null, null, water],
+           [null, null, null, water]]
   }
 
-  //generate the name of the gamedw
+  //generate the name of the game
   function genName() {
     return "Justness Guild";
   }

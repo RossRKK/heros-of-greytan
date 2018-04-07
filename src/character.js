@@ -11,8 +11,8 @@ class Character {
 
     //Pixel coordinates
     this.position = {
-      x: 0,
-      y: 0
+      x: 60,
+      y: 60
     }
 
     this.hp = 10;
