@@ -1,7 +1,9 @@
 const GRID_SIZE = 120;
 
 $(function () {
+  RenderEngine.init();
   Game.init();
+  Events.init();
 });
 
 var Game = function () {
@@ -20,21 +22,20 @@ var Game = function () {
 
   //initialise the game
   function init() {
-    RenderEngine.init();
 
     character = new Character();
 
     update();
+    renderGame();
   }
 
-  //update the state of the game
-  function update() {
-
-
-    RenderEngine.render(character, level);
+  //render the game
+  function renderGame() {
+      RenderEngine.render(character, level);
+      window.requestAnimationFrame(renderGame);
   }
 
-  function isALive() {
+  function isAlive() {
       if (character.hp = 0) {
           return false;
       } else {
@@ -43,12 +44,33 @@ var Game = function () {
   }
 
   function hasEnded() {
-
+      return false;
   }
 
-  function gameLoop() {
-      while (isAlive() && !hasEnded()) {
-          character.move();
+  //update the state of the game
+  function update() {
+      let keyTracker = Events.getKeyTracker();
+      if (keyTracker.left) {
+          character.accelerate("LEFT");
+      }
+      if (keyTracker.right) {
+          character.accelerate("RIGHT");
+      }
+      if (!keyTracker.left && !keyTracker.right) {
+          character.accelerate("HORIZONTAL");
+      }
+      if (keyTracker.up) {
+          character.accelerate("UP");
+      }
+      if (keyTracker.down) {
+          character.accelerate("DOWN");
+      }
+      character.move();
+
+      // RenderEngine.render(character, level);
+
+      if (isAlive() && !hasEnded()) {
+          setTimeout(update, 10);
       }
   }
 

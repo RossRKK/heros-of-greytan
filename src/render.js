@@ -20,7 +20,7 @@ var RenderEngine = function () {
 
     //translate the canvas so that the character always appears in the same position
     //one block from the right
-    ctx.translate(character.position.x + GRID_SIZE, CANVAS_HEIGHT + character.position.y - (2 * GRID_SIZE));
+    //ctx.translate(character.position.x + GRID_SIZE, CANVAS_HEIGHT + character.position.y - (2 * GRID_SIZE));
 
     //draw the level
     drawLevel(level);
