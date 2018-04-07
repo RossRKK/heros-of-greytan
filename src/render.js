@@ -82,9 +82,6 @@ var RenderEngine = function () {
     }
 
     function drawDeath(character) {
-      /*ctx.font = "50px Arial";
-      ctx.fillText("You Died", 0, 0);
-      window.setTimeout(Game.init, 500);*/
       alert("You died");
       Game.init();
     }
