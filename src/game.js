@@ -107,7 +107,7 @@ var Game = function () {
   let canSwap = true;
 
   function switchMask(level, character) {
-      tile = getTile(level, character.position.x, character.position.y);
+      tile = getTile(level, character.position.x + (GRID_SIZE / 2), character.position.y + (GRID_SIZE / 2));
 
       if (tile && canSwap) {
           switch (tile.mask) {
@@ -151,6 +151,7 @@ var Game = function () {
 
 
   return {
-    init: init
+    init: init,
+    getCharacter: function () { return character }
   }
 }();

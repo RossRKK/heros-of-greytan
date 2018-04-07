@@ -24,7 +24,7 @@ class GridCell {
 
 function isObstructed(level, x, y) {
     let tile = getTile(level, x, y);
-    if (tile === undefined) return true;
+    if (tile === undefined) return false;
     if (tile === null) return false;
     return tile.isSolid;
 }
@@ -47,7 +47,7 @@ function isHurt(level, x, y) {
     if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
         return level.grid[gridX][gridY] ? level.grid[gridX][gridY].isKillBlock : false;
     } else {
-        return undefined;
+        return true;
     }
 }
 
