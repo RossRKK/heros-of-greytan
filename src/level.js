@@ -4,6 +4,8 @@ class GridCell {
 
     this.img = document.createElement("img");
     this.img.src = imgSrc;
+
+    this.solid = true;
   }
 
   //draw the grid cell
