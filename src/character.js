@@ -21,6 +21,9 @@ class Character {
 
     this.height = GRID_SIZE * 2;
     this.width = GRID_SIZE;
+
+    this.img = document.createElement("img");
+    this.img.src = "textures/BobGrapple.png";
   }
 
   //Game loops every 0.1 secs
@@ -48,7 +51,7 @@ class Character {
             if (this.velocity.x < this.horizontalMaxSpeed + 2) {
             this.velocity.x += 0.5;
             }
-        }  
+        }
     }
 
     if (!keyTracker.left && !keyTracker.right) {
@@ -68,7 +71,7 @@ class Character {
     if (keyTracker.down) {
         this.velocity.y += (this.gravity - this.velocity.y) * 0.02;
     }
-    
+
     if (!keyTracker.up && !keyTracker.down) {
         this.velocity.y += (this.gravity - this.velocity.y) * 0.015;
     }
@@ -89,7 +92,8 @@ class Character {
           this.velocity.y = 0;
       }
 
-      if (!isObstructed(level, x, y + (this.height / 2)) && !isObstructed(level, x + this.width, y + (this.height / 2))) {
+      if (!isObstructed(level, x, y + (3 * this.height / 4)) && !isObstructed(level, x + this.width, y + (3 * this.height / 4))
+        && !isObstructed(level, x, y + (this.height / 4)) && !isObstructed(level, x + this.width, y + (this.height / 4))) {
           this.position.x = x;
       } else {
           this.position.x = Math.round(x/GRID_SIZE) * GRID_SIZE;
@@ -99,8 +103,12 @@ class Character {
 
   //draw the character
   draw(ctx) {
-    //draw the character
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+      if (this.img.src) {
+          ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
+      } else {
+        //draw the character
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
   }
 }
