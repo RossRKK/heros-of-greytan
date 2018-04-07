@@ -12,10 +12,10 @@ var Game = function () {
 
   let level = {
     background: "#68a2ff",
-    grid: [[null, new GridCell("green", "textures/grass.png")], [null, new GridCell("green", "textures/grass.png")], [null, new GridCell("green", "textures/grass.png")]]
+    grid: [[null, null, new GridCell("green", "textures/grass.png")], [null, null, new GridCell("green", "textures/grass.png")], [null, null, new GridCell("green", "textures/grass.png")]]
   }
 
-  //generate the name of the game
+  //generate the name of the gamedw
   function genName() {
     return "Justness Guild";
   }
