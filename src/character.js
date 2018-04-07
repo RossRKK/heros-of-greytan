@@ -17,7 +17,7 @@ class Character {
       y: 60
     }
 
-    this.hp = 10;
+    this.hp = 100;
 
     this.height = GRID_SIZE * 2;
     this.width = GRID_SIZE;
@@ -68,9 +68,15 @@ class Character {
     if (keyTracker.down) {
         this.velocity.y += (this.gravity - this.velocity.y) * 0.02;
     }
-    
+
     if (!keyTracker.up && !keyTracker.down) {
         this.velocity.y += (this.gravity - this.velocity.y) * 0.015;
+    }
+
+    if (isHurt(level, this.position.x, this.position.y + this.height + 0.1) || isHurt(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
+        this.hp -= 1;
+    } else if (this.hp < 100) {
+        this.hp += 1;
     }
 
 }

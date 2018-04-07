@@ -1,11 +1,12 @@
 class GridCell {
-  constructor (background, imgSrc, solid) {
+  constructor (background, imgSrc, isSolid, isKillBlock) {
     this.background = background;
 
     this.img = document.createElement("img");
     this.img.src = imgSrc;
 
-    this.solid = solid;
+    this.isSolid = isSolid;
+    this.isKillBlock = isKillBlock;
   }
 
   //draw the grid cell
@@ -25,7 +26,18 @@ function isObstructed(level, x, y) {
     let gridY = Math.floor(y / GRID_SIZE);
 
     if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
-        return level.grid[gridX][gridY] ? level.grid[gridX][gridY].solid : false;
+        return level.grid[gridX][gridY] ? level.grid[gridX][gridY].isSolid : false;
+    } else {
+        return true;
+    }
+}
+
+function isHurt(level, x, y) {
+  let gridX = Math.floor(x / GRID_SIZE);
+    let gridY = Math.floor(y / GRID_SIZE);
+
+    if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
+        return level.grid[gridX][gridY] ? level.grid[gridX][gridY].isKillBlock : false;
     } else {
         return true;
     }

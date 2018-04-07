@@ -12,10 +12,10 @@ var Game = function () {
 
   let name;
 
-  grass = new GridCell("green", "textures/grass.png", true);
-  water = new GridCell("green", "textures/water.png", false);
-  tower = new GridCell("green", "textures/tower.png", true);
-  tree = new GridCell("#68a2ff", "textures/tree.png", true);
+  grass = new GridCell("green", "textures/grass.png", true, false);
+  water = new GridCell("green", "textures/water.png", false, true);
+  tower = new GridCell("green", "textures/tower.png", true, false);
+  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
 
   let level = {
     background: "#68a2ff",
@@ -91,7 +91,7 @@ var Game = function () {
   }
 
   function isAlive() {
-      if (character.hp = 0) {
+      if (character.hp <= 0) {
           return false;
       } else {
           return true;

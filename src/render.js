@@ -22,12 +22,24 @@ var RenderEngine = function () {
         ctx.translate(- character.position.x + (CANVAS_WIDTH / 2), -character.position.y + (CANVAS_HEIGHT / 2));
 
         //draw the level
-        drawLevel(level);
+        drawLevel(level, character.hp);
 
         //draw the character
         character.draw(ctx);
 
         ctx.restore();
+        drawHUD(character);
+    }
+
+    function drawHUD(character) {
+      if (character.hp > 50) {
+        ctx.fillStyle = "#ADFF2F";
+      } else if (character.hp > 20) {
+        ctx.fillStyle = "#FF4500";
+      } else {
+        ctx.fillStyle = "#000000";
+      }
+      ctx.fillRect(5, 5, character.hp * 2, 10);
     }
 
     function drawLevel(level) {
