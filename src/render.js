@@ -3,6 +3,8 @@ var RenderEngine = function () {
     const CANVAS_HEIGHT = 720;
 
     let ctx;
+    let tranX;
+    let tranY;
 
     function init() {
         ctx = document.getElementById('canvas').getContext('2d');
@@ -19,7 +21,10 @@ var RenderEngine = function () {
         ctx.save();
 
         //translate the canvas so that the character always appears in the middle
-        ctx.translate(- character.position.x + (CANVAS_WIDTH / 2), -character.position.y + (CANVAS_HEIGHT / 2));
+        tranX = -character.position.x + (CANVAS_WIDTH / 2);
+        tranY = -character.position.y + (CANVAS_HEIGHT / 2);
+
+        ctx.translate(tranX, tranY);
 
         //draw the level
         drawLevel(level, character.hp);
@@ -97,6 +102,8 @@ var RenderEngine = function () {
     return {
         init: init,
         render: render,
-        drawDeath: drawDeath
+        getTranX: function () { return tranX },
+        getTranY: function () { return tranY }
     }
 }();
+RenderEngine.init();

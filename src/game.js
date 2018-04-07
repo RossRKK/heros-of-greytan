@@ -49,6 +49,32 @@ var Game = function () {
            [null, null, null, null, null, null, grass]]
   }
 
+  function changeLevel(xClick, yClick) {
+      // alert(xClick);
+      // alert(yClick);
+      // alert(RenderEngine.getTranX());
+      if (xClick > RenderEngine.getTranX() && yClick > RenderEngine.getTranY()) {
+          let bounds = document.getElementById("canvas").getBoundingClientRect();
+
+          xClick = xClick - RenderEngine.getTranX() - bounds.left;
+          yClick = yClick - RenderEngine.getTranY() - bounds.top;
+
+          blockXPos = Math.floor(xClick / GRID_SIZE);
+          blockYPos = Math.floor(yClick / GRID_SIZE);
+
+          /*alert(xClick);
+          alert(blockXPos);*/
+
+          level.grid[blockXPos][blockYPos] = grass;
+      }
+  }
+
+  function getMousePos(event) {
+      changeLevel(event.clientX, event.clientY);
+  }
+
+  document.addEventListener("click", getMousePos);
+
   let adjectives = [
       "Authority",
       "Honesty",
