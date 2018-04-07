@@ -35,6 +35,30 @@ var Game = function () {
            [null, null, null, null, null, null, water]]
   }
 
+  function changeLevel(xClick, yClick) {
+      // alert(xClick);
+      // alert(yClick);
+      // alert(RenderEngine.getTranX());
+      if (xClick > RenderEngine.getTranX() && yClick > RenderEngine.getTranY()) {
+          xClick = xClick - RenderEngine.getTranX();
+          yClick = yClick - RenderEngine.getTranY();
+
+          blockXPos = Math.floor(xClick / GRID_SIZE);
+          blockYPos = Math.floor(yClick / GRID_SIZE);
+
+          /*alert(xClick);
+          alert(blockXPos);*/
+
+          level.grid[blockXPos][blockYPos - 1] = grass;
+      }
+  }
+
+  function getMousePos(event) {
+      changeLevel(event.clientX, event.clientY);
+  }
+
+  document.addEventListener("click", getMousePos);
+
   let adjectives = [
       "Authority",
       "Honesty",

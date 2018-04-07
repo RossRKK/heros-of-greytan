@@ -111,7 +111,7 @@ class Character {
       }
   }
 
-  
+
 
   //draw the character
   draw(ctx) {
