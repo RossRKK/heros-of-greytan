@@ -11,13 +11,13 @@ class GridCell {
 
   //draw the grid cell
   draw(ctx, x, y) {
-    ctx.fillStyle = this.background;
-    ctx.fillRect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
-
-    //draw an image if it's available
-    if (this.img.src) {
-      ctx.drawImage(this.img, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
-    }
+      //draw an image if it's available
+      if (this.img.src) {
+        ctx.drawImage(this.img, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+      } else {
+          ctx.fillStyle = this.background;
+          ctx.fillRect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+      }
   }
 }
 
