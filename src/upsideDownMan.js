@@ -1,0 +1,3 @@
+class upsideDownMan extends character {
+	
+}

@@ -12,14 +12,15 @@ var Game = function () {
 
   let name;
 
-  grass = new GridCell("green", "textures/grass.png", true, false);
-  water = new GridCell("green", "textures/water.png", false, true);
-  tower = new GridCell("green", "textures/tower.png", true, false);
-  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+  grass = new GridCell("green", "textures/grass2.png", true, "none", false);
+  water = new GridCell("green", "textures/water.png", false, "none", true);
+  tower = new GridCell("green", "textures/tower.png", true, "none", false);
+  tree = new GridCell("#68a2ff", "textures/tree.png", true, "none", false);
+  upsideDownMask = new GridCell("#68a2ff", "textures/upsideDownManHigh.png", false, "UDM", false);
 
   let level = {
     background: "#68a2ff",
-    grid: [[null, null, null, tower, tower, tower, grass],
+    grid: [[upsideDownMask, null, null, tower, tower, tower, grass],
            [null, null, null, null, null, null, grass],
            [null, null, null, null, null, null, grass],
            [null, null, null, null, null, grass, grass],
