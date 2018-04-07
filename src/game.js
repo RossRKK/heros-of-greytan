@@ -35,7 +35,7 @@ var Game = function () {
   }
 
   function isALive() {
-      if (character.hp = 0) {
+      if (character.hp === 0) {
           return false;
       } else {
           return true;
