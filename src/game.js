@@ -1,4 +1,4 @@
-const GRID_SIZE = 120;
+const GRID_SIZE = 60;
 
 $(function () {
   RenderEngine.init();
@@ -68,6 +68,9 @@ var Game = function () {
       }
       if (keyTracker.down) {
           character.accelerate("DOWN");
+      }
+      if (!keyTracker.up && !keyTracker.down) {
+        character.accelerate("VERTICAL");
       }
       character.move();
 

@@ -44,6 +44,8 @@ class Character {
         case "HORIZONTAL":
         this.velocity.x = 0.5 * this.velocity.x;
         break;
+        case "VERTICAL":
+        this.velocity.y = 0.5 * this.velocity.y;
     }
 
 }
