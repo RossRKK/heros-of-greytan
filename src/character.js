@@ -101,6 +101,8 @@ class Character {
       }
   }
 
+  
+
   //draw the character
   draw(ctx) {
       if (this.img.src) {
