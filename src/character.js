@@ -22,6 +22,7 @@ class Character {
     this.height = GRID_SIZE * 2;
     this.width = GRID_SIZE;
 
+    this.mask = null;
     this.img = document.createElement("img");
     this.img.src = "textures/BobGrapple.png";
   }
@@ -106,8 +107,6 @@ class Character {
           this.velocity.x = 0;
       }
   }
-
-  
 
   //draw the character
   draw(ctx) {

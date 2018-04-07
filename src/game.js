@@ -12,11 +12,11 @@ var Game = function () {
 
   let name;
 
-  grass = new GridCell("green", "textures/grass2.png", true, "none", false);
-  water = new GridCell("green", "textures/water.png", false, "none", true);
-  tower = new GridCell("green", "textures/tower.png", true, "none", false);
-  tree = new GridCell("#68a2ff", "textures/tree.png", true, "none", false);
-  upsideDownMask = new GridCell("#68a2ff", "textures/upsideDownManHigh.png", false, "UDM", false);
+  grass = new GridCell("green", "textures/grass2.png", true, false);
+  water = new GridCell("green", "textures/water.png", false, true);
+  tower = new GridCell("green", "textures/tower.png", true, false);
+  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+  upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
 
   let level = {
     background: "#68a2ff",
@@ -103,11 +103,28 @@ var Game = function () {
       return false;
   }
 
+  function switchMask(level, character) {
+      tile = getTile(level, character.position.x, character.position.y);
+
+      if (tile) {
+          switch (tile.mask) {
+              case "UDM":
+                tile.setMask(character.mask);
+                return new upsideDownMan(character);
+            default:
+                return character;
+          }
+      } else {
+          return character;
+      }
+  }
+
   //update the state of the game
   function update() {
       let keyTracker = Events.getKeyTracker();
       character.updatePosition(keyTracker, level);
       character.move(level);
+      character = switchMask(level, character);
 
       // RenderEngine.render(character, level);
 
