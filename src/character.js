@@ -17,13 +17,15 @@ class Character {
       y: 60
     }
 
-    this.hp = 10;
+    this.hp = 500;
+    this.hpBuffer = 150;
 
     this.height = GRID_SIZE * 2;
     this.width = GRID_SIZE;
 
+    this.mask = null;
     this.img = document.createElement("img");
-    this.img.src = "textures/BobGrapple.png";
+    this.img.src = "textures/Bob.png";
   }
 
   //Game loops every 0.1 secs
@@ -76,6 +78,15 @@ class Character {
         this.velocity.y += (this.gravity - this.velocity.y) * 0.015;
     }
 
+    if (isHurt(level, this.position.x + 10, this.position.y + this.height - 10) || isHurt(level, this.position.x + this.width - 10, this.position.y + this.height - 10)) {
+        this.hp -= 3;
+        this.hpBuffer = 0;
+    } else if (this.hp < 500) {
+        this.hp += 1;
+    } else if (this.hpBuffer < 150) {
+        this.hpBuffer += 1;
+    }
+
 }
 
   //move adds velocity to the character in the given direction
@@ -110,5 +121,9 @@ class Character {
         ctx.fillStyle = "red";
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
+  }
+
+  action() {
+      //there is no action
   }
 }

@@ -22,12 +22,26 @@ var RenderEngine = function () {
         ctx.translate(- character.position.x + (CANVAS_WIDTH / 2), -character.position.y + (CANVAS_HEIGHT / 2));
 
         //draw the level
-        drawLevel(level);
+        drawLevel(level, character.hp);
 
         //draw the character
         character.draw(ctx);
 
+        drawHUD(character);
         ctx.restore();
+    }
+
+    function drawHUD(character) {
+      if (character.hp < 500 || character.hpBuffer < 150) {
+        if (character.hp > 250) {
+          ctx.fillStyle = "#ADFF2F";
+        } else if (character.hp > 100) {
+          ctx.fillStyle = "#FF4500";
+        } else {
+          ctx.fillStyle = "#000000";
+        }
+        ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
+    }
     }
 
     function drawLevel(level) {
@@ -67,8 +81,14 @@ var RenderEngine = function () {
         ctx.stroke();
     }
 
+    function drawDeath(character) {
+      alert("You died");
+      Game.init();
+    }
+
     return {
         init: init,
-        render: render
+        render: render,
+        drawDeath: drawDeath
     }
 }();
