@@ -1,8 +1,9 @@
 class Character {
 
   constructor () {
-    this.maxSpeed = 10;
-    this.gravity = 4;
+    this.horizontalMaxSpeed = 5;
+    this.verticalMaxSpeed = 6;
+    this.gravity = 9.8;
 
     //Velocity = Length moved/game loop length
     this.velocity = {
@@ -27,31 +28,31 @@ class Character {
   accelerate(dir, level) {
       switch (dir) {
         case "LEFT":
-        if (this.velocity.x > -this.maxSpeed) {
+        if (this.velocity.x > -this.horizontalMaxSpeed) {
             this.velocity.x--;
         }
         break;
         case "RIGHT":
-        if (this.velocity.x < this.maxSpeed) {
+        if (this.velocity.x < this.horizontalMaxSpeed) {
             this.velocity.x++;
         }
         break;
         case "UP":
         if (isObstructed(level, this.position.x, this.position.y + this.height + 0.1) || isObstructed(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
-            this.velocity.y = -this.maxSpeed;
+            this.velocity.y = -this.verticalMaxSpeed;
         } else {
-            this.velocity.y = this.velocity.y + (this.gravity - this.velocity.y) * 0.05;
+            this.velocity.y = this.velocity.y + (this.gravity - this.velocity.y) * 0.02;
         }
         break;
         case "DOWN":
-        if (this.velocity.y < this.maxSpeed) {
+        if (this.velocity.y < this.horizontalMaxSpeed) {
             this.velocity.y++;
         }
         case "HORIZONTAL":
         this.velocity.x = 0.5 * this.velocity.x;
         break;
         case "VERTICAL":
-        this.velocity.y = this.velocity.y + (this.gravity - this.velocity.y) * 0.1;
+        this.velocity.y = this.velocity.y + (this.gravity - this.velocity.y) * 0.05;
         break;
     }
 
