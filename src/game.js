@@ -18,6 +18,7 @@ var Game = function () {
   tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
   upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
   speedMask = new MaskCell("#68a2ff", false, false, "SM");
+  grappleMask = new MaskCell("68a2ff", false, false, "GG");
 
   let level = {
     background: "#68a2ff",
@@ -25,7 +26,7 @@ var Game = function () {
            [null, null, null, null, null, null, grass],
            [null, null, null, null, null, null, grass],
            [null, null, null, null, null, grass, grass],
-           [null, null, null, null, tree, grass, grass],
+           [grappleMask, null, null, null, tree, grass, grass],
            [null, null, null, null, null, grass, grass],
            [null, null, null, null, null, null, grass],
            [null, null, null, null, null, null, grass],
@@ -158,6 +159,9 @@ var Game = function () {
             case "SM":
                 swap(tile, character);
                 return new speedMan(character);
+            case "GG":
+                swap(tile, character);
+                return new grappleGuy(character);
             default:
                 return character;
           }
@@ -193,6 +197,7 @@ var Game = function () {
 
   return {
     init: init,
-    getCharacter: function () { return character }
+    getCharacter: function () { return character },
+    getLevel: function () { return level }
   }
 }();
