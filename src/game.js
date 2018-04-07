@@ -10,9 +10,13 @@ var Game = function () {
   //the character the player is playing as
   let character;
 
+  grass = new GridCell("green", "textures/grass.png");
+
   let level = {
     background: "#68a2ff",
-    grid: [[null, null, new GridCell("green", "textures/grass.png")], [null, null, new GridCell("green", "textures/grass.png")], [null, null, new GridCell("green", "textures/grass.png")]]
+    grid: [[null, grass],
+           [null, grass],
+           [null, grass]]
   }
 
   //generate the name of the gamedw

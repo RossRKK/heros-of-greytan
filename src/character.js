@@ -3,12 +3,6 @@ class Character {
   constructor () {
     this.maxSpeed = 10;
 
-    //Either -1, 0 or 1
-    this.acceleration = {
-        x: 0,
-        y: 0
-    }
-
     //Velocity = Length moved/game loop length
     this.velocity = {
       x: 0,
@@ -29,46 +23,29 @@ class Character {
   accelerate(dir) {
       switch (dir) {
         case "LEFT":
-        if (this.acceleration.x > -1) {
-            this.acceleration.x--;
+        if (this.velocity.x > -this.maxSpeed) {
+            this.velocity.x--;
         }
         break;
         case "RIGHT":
-        if (this.acceleration.x < 1) {
-            this.acceleration.x++;
+        if (this.velocity.x < this.maxSpeed) {
+            this.velocity.x++;
         }
         break;
         case "UP":
-        if (this.acceleration.y > -1) {
-            this.acceleration.y--;
+        if (this.velocity.y > -this.maxSpeed) {
+            this.velocity.y--;
         }
         break;
         case "DOWN":
-        if (this.acceleration.y < 1) {
-            this.acceleration.y++;
+        if (this.velocity.y < this.maxSpeed) {
+            this.velocity.y++;
         }
         case "HORIZONTAL":
-        if (-0.5 < this.velocity.x < 0.5) {
-            this.velocity.x = 0;
-            this.acceleration.x = 0;
-        }
-        else if (this.velocity.x > 0) {
-            this.acceleration.x = -1;
-        }
-        else if (this.velocity.x < 0) {
-            this.acceleration.x = 1;
-        }
+        this.velocity.x = 0.5 * this.velocity.x;
         break;
     }
 
-    this.velocity.x += this.acceleration.x;
-    this.velocity.y += this.acceleration.y;
-    if (this.velocity.x > this.maxSpeed) {
-        this.velocity.x = this.maxSpeed;
-    }
-    else if (this.velocity.x < -this.maxSpeed) {
-        this.velocity.x = -this.maxSpeed;
-    }
 }
 
   //move adds velocity to the character in the given direction

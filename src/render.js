@@ -55,7 +55,7 @@ var RenderEngine = function () {
     //draw a grid over the level
     function drawGrid(level) {
         ctx.beginPath();
-        for (let i = 0; i <= level.grid.length; i ++) {
+        for (let i = 0; i <= level.grid.ldength; i ++) {
             ctx.moveTo(i * GRID_SIZE, 0);
             ctx.lineTo(i * GRID_SIZE, level.grid[0].length * GRID_SIZE);
         }
