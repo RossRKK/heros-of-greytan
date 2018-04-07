@@ -6,18 +6,18 @@ class Character {
     this.acceleration = 2;
 
     this.velocity = {
-      x = 0,
-      y = 0
+      x: 0,
+      y: 0
     }
 
     this.position = {
-      x = 0,
-      y = 0
+      x: 0,
+      y: -120
     }
   }
 
   //move add velocity to the character in the given direction
-  function move(dir) {
+  move(dir) {
     switch (dir) {
       case "LEFT":
         this.velocity.x -= this.acceleration;
@@ -32,5 +32,12 @@ class Character {
         this.velocity.y += this.acceleration;
         break;
     }
+  }
+
+  //draw the character
+  draw(ctx) {
+    //draw the character
+    ctx.fillStyle = "red";
+    ctx.fillRect(this.position.x, this.position.y, GRID_SIZE, 2 * GRID_SIZE);
   }
 }

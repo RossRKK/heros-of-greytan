@@ -1,10 +1,17 @@
 const GRID_SIZE = 120;
 
+$(function () {
+  Game.init();
+});
+
 var Game = function () {
   //the character the player is playing as
   let character;
 
-  let level;
+  let level = {
+    background: "#68a2ff",
+    grid: [[null, new GridCell("green", "textures/grass.png")], [null, new GridCell("green", "textures/grass.png")], [null, new GridCell("green", "textures/grass.png")]]
+  }
 
   //generate the name of the game
   function genName() {
@@ -13,14 +20,18 @@ var Game = function () {
 
   //initialise the game
   function init() {
+    RenderEngine.init();
+
     character = new Character();
+
+    update();
   }
 
   //update the state of the game
   function update() {
 
 
-    render();
+    RenderEngine.render(character, level);
   }
 
   return {
