@@ -17,6 +17,7 @@ var Game = function () {
   tower = new GridCell("green", "textures/tower.png", true, false);
   tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
   upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
+  speedMask = new MaskCell("#68a2ff", false, false, "SM");
 
   let level = {
     background: "#68a2ff",
@@ -32,7 +33,7 @@ var Game = function () {
            [null, null, null, null, null, null, water],
            [null, null, null, null, null, null, water],
            [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water]]
+           [speedMask, null, null, null, null, null, water]]
   }
 
   let adjectives = [
@@ -103,20 +104,32 @@ var Game = function () {
       return false;
   }
 
+  let canSwap = true;
+
   function switchMask(level, character) {
       tile = getTile(level, character.position.x, character.position.y);
 
-      if (tile) {
+      if (tile && canSwap) {
           switch (tile.mask) {
-              case "UDM":
-                tile.setMask(character.mask);
+            case "UDM":
+                swap(tile, character);
                 return new upsideDownMan(character);
+            case "SM":
+                swap(tile, character);
+                return new speedMan(character);
             default:
                 return character;
           }
       } else {
           return character;
       }
+  }
+
+  function swap(tile, character) {
+      tile.setMask(character.mask);
+      canSwap = false;
+
+      setTimeout(function(){canSwap = true}, 1000);
   }
 
   //update the state of the game

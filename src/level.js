@@ -65,6 +65,9 @@ class MaskCell extends GridCell {
             case "UDM":
                 this.img.src = "textures/upsideDownManHigh.png";
                 break;
+            case "SM":
+                this.img.src = "textures/speedBoiHigh.png";
+                break;
             default:
                 this.img.src = null;
         }

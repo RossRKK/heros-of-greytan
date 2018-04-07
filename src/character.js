@@ -25,7 +25,7 @@ class Character {
 
     this.mask = null;
     this.img = document.createElement("img");
-    this.img.src = "textures/BobGrapple.png";
+    this.img.src = "textures/Bob.png";
   }
 
   //Game loops every 0.1 secs
