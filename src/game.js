@@ -12,11 +12,18 @@ var Game = function () {
 
   let name;
 
+<<<<<<< HEAD
   grass = new GridCell("green", "textures/grass2.png", true, "none");
   water = new GridCell("green", "textures/water.png", false, "none");
   tower = new GridCell("green", "textures/tower.png", true, "none");
   tree = new GridCell("#68a2ff", "textures/tree.png", true, "none");
   upsideDownMask = new GridCell("#68a2ff", "textures/upsideDownManHigh.png", false, "UDM");
+=======
+  grass = new GridCell("green", "textures/grass.png", true, false);
+  water = new GridCell("green", "textures/water.png", false, true);
+  tower = new GridCell("green", "textures/tower.png", true, false);
+  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+>>>>>>> ed39166e8078f7d9d8e11a7886876ea206e78487
 
   let level = {
     background: "#68a2ff",
@@ -92,7 +99,7 @@ var Game = function () {
   }
 
   function isAlive() {
-      if (character.hp = 0) {
+      if (character.hp <= 0) {
           return false;
       } else {
           return true;
