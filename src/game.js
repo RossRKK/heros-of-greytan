@@ -70,15 +70,17 @@ var Game = function () {
 
   //generate the name of the game
   function genName() {
-    return adjectives[Math.floor(Math.random()*adjectives.length)] + " " + nouns[Math.floor(Math.random()*nouns.length)];
+    name =  adjectives[Math.floor(Math.random()*adjectives.length)] + " " + nouns[Math.floor(Math.random()*nouns.length)];
+
+    $("title").html(name);
+    $("#title").text(name);
+
+    setTimeout(genName, 5000);
   }
 
   //initialise the game
   function init() {
-    name = genName();
-
-    $("title").html(name);
-    $("#title").text(name);
+    genName();
 
     character = new Character();
 
