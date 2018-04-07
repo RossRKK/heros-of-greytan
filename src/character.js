@@ -57,21 +57,32 @@ class Character {
     }
 
     if (!keyTracker.left && !keyTracker.right) {
-        this.velocity.x *= 0.5;
+        this.velocity.x *= 0.7;
     }
 
     if (keyTracker.up) {
-        if (!keyTracker.down) {
-            if (isObstructed(level, this.position.x, this.position.y + this.height + 0.1) || isObstructed(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
-                this.velocity.y = -this.verticalMaxSpeed;
-            } else {
-                this.velocity.y += (this.gravity - this.velocity.y) * 0.0075;
+        if (this.gravity > 0) {
+            if (!keyTracker.down) {
+                if (isObstructed(level, this.position.x, this.position.y + this.height + 0.1) || isObstructed(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
+                    this.velocity.y = -this.verticalMaxSpeed;
+                } else {
+                    this.velocity.y += (this.gravity - this.velocity.y) * 0.0075;
+                }
+            }
+        } else {
+            if (!keyTracker.down) {
+                if (isObstructed(level, this.position.x, this.position.y - 0.1) || isObstructed(level, this.position.x + this.width, this.position.y - 0.1)) {
+                    this.velocity.y = this.verticalMaxSpeed;
+                } else {
+                    this.velocity.y += (this.gravity - this.velocity.y) * 0.0075;
+                }
             }
         }
     }
 
     if (keyTracker.down) {
         this.velocity.y += (this.gravity - this.velocity.y) * 0.02;
+
     }
 
     if (!keyTracker.up && !keyTracker.down) {
