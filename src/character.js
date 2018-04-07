@@ -23,8 +23,9 @@ class Character {
     this.height = GRID_SIZE * 2;
     this.width = GRID_SIZE;
 
+    this.mask = null;
     this.img = document.createElement("img");
-    this.img.src = "textures/BobGrapple.png";
+    this.img.src = "textures/Bob.png";
   }
 
   //Game loops every 0.1 secs
@@ -111,8 +112,11 @@ class Character {
       }
   }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 92511bdd1ef42f82eaf5fdc70e432df55eb4761b
   //draw the character
   draw(ctx) {
       if (this.img.src) {
@@ -122,5 +126,9 @@ class Character {
         ctx.fillStyle = "red";
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
+  }
+
+  action() {
+      //there is no action
   }
 }

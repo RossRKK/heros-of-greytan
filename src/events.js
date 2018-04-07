@@ -50,10 +50,20 @@ var Events = function () {
 		}
 	}
 
+	function keyPress(e) {
+		console.log(e);
+		switch (e.keyCode) {
+			case 32:
+				Game.getCharacter().action();
+				break;
+		}
+	}
+
 	//initialise event handlers
 	function init() {
 		$(document).on("keydown", keyDown);
 		$(document).on("keyup", keyUp);
+		$(document).on("keypress", keyPress);
 	}
 
 	return {

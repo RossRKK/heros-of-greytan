@@ -86,11 +86,20 @@ var RenderEngine = function () {
         ctx.stroke();
     }
 
+    function drawDeath(character) {
+      alert("You died");
+      Game.init();
+    }
+
     return {
         init: init,
         render: render,
+<<<<<<< HEAD
         getTranX: function () { return tranX },
         getTranY: function () { return tranY }
+=======
+        drawDeath: drawDeath
+>>>>>>> 92511bdd1ef42f82eaf5fdc70e432df55eb4761b
     }
 }();
 RenderEngine.init();

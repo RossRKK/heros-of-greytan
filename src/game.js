@@ -12,27 +12,28 @@ var Game = function () {
 
   let name;
 
-  grass = new GridCell("green", "textures/grass2.png", true, "none", false);
-  water = new GridCell("green", "textures/water.png", false, "none", true);
-  tower = new GridCell("green", "textures/tower.png", true, "none", false);
-  tree = new GridCell("#68a2ff", "textures/tree.png", true, "none", false);
-  upsideDownMask = new GridCell("#68a2ff", "textures/upsideDownManHigh.png", false, "UDM", false);
+  grass = new GridCell("green", "textures/grass2.png", true, false);
+  water = new GridCell("green", "textures/water.png", false, true);
+  tower = new GridCell("green", "textures/tower.png", true, false);
+  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+  upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
+  speedMask = new MaskCell("#68a2ff", false, false, "SM");
 
   let level = {
     background: "#68a2ff",
-    grid: [[upsideDownMask, null, null, tower, tower, tower, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, grass, grass],
-           [null, null, null, null, tree, grass, grass],
-           [null, null, null, null, null, grass, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water]]
+    grid: [[grass, upsideDownMask, null, null, tower, tower, tower, grass],
+           [grass, null, null, null, null, null, null, grass],
+           [grass, null, null, null, null, null, null, grass],
+           [grass, null, null, null, null, null, grass, grass],
+           [grass, null, null, null, null, tree, grass, grass],
+           [grass, null, null, null, null, null, grass, grass],
+           [grass, null, null, null, null, null, null, grass],
+           [grass, null, null, null, null, null, null, grass],
+           [grass, null, null, null, null, null, null, grass],
+           [grass, null, null, null, null, null, null, water],
+           [grass, null, null, null, null, null, null, water],
+           [grass, null, null, null, null, null, null, water],
+           [grass, speedMask, null, null, null, null, null, water]]
   }
 
   function changeLevel(xClick, yClick) {
@@ -93,15 +94,17 @@ var Game = function () {
 
   //generate the name of the game
   function genName() {
-    return adjectives[Math.floor(Math.random()*adjectives.length)] + " " + nouns[Math.floor(Math.random()*nouns.length)];
+    name =  adjectives[Math.floor(Math.random()*adjectives.length)] + " " + nouns[Math.floor(Math.random()*nouns.length)];
+
+    $("title").html(name);
+    $("#title").text(name);
+
+    setTimeout(genName, 5000);
   }
 
   //initialise the game
   function init() {
-    name = genName();
-
-    $("title").html(name);
-    $("#title").text(name);
+    genName();
 
     character = new Character();
 
@@ -127,24 +130,54 @@ var Game = function () {
       return false;
   }
 
+  let canSwap = true;
+
+  function switchMask(level, character) {
+      tile = getTile(level, character.position.x + (GRID_SIZE / 2), character.position.y + (GRID_SIZE / 2));
+
+      if (tile && canSwap) {
+          switch (tile.mask) {
+            case "UDM":
+                swap(tile, character);
+                return new upsideDownMan(character);
+            case "SM":
+                swap(tile, character);
+                return new speedMan(character);
+            default:
+                return character;
+          }
+      } else {
+          return character;
+      }
+  }
+
+  function swap(tile, character) {
+      tile.setMask(character.mask);
+      canSwap = false;
+
+      setTimeout(function(){canSwap = true}, 1000);
+  }
+
   //update the state of the game
   function update() {
       let keyTracker = Events.getKeyTracker();
       character.updatePosition(keyTracker, level);
       character.move(level);
+      character = switchMask(level, character);
 
       // RenderEngine.render(character, level);
 
       if (isAlive() && !hasEnded()) {
           setTimeout(update, 10);
       } else {
-        location.reload();
+        RenderEngine.drawDeath(character);
       }
   }
 
 
 
   return {
-    init: init
+    init: init,
+    getCharacter: function () { return character }
   }
 }();
