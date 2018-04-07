@@ -114,7 +114,7 @@ var Game = function () {
       if (isAlive() && !hasEnded()) {
           setTimeout(update, 10);
       } else {
-        location.reload();
+        RenderEngine.drawDeath(character);
       }
   }
 
