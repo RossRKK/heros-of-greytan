@@ -1,11 +1,11 @@
 class GridCell {
-  constructor (background, imgSrc) {
+  constructor (background, imgSrc, solid) {
     this.background = background;
 
     this.img = document.createElement("img");
     this.img.src = imgSrc;
 
-    this.solid = true;
+    this.solid = solid;
   }
 
   //draw the grid cell
