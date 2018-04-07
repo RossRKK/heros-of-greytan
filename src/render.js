@@ -27,19 +27,21 @@ var RenderEngine = function () {
         //draw the character
         character.draw(ctx);
 
-        ctx.restore();
         drawHUD(character);
+        ctx.restore();
     }
 
     function drawHUD(character) {
-      if (character.hp > 50) {
-        ctx.fillStyle = "#ADFF2F";
-      } else if (character.hp > 20) {
-        ctx.fillStyle = "#FF4500";
-      } else {
-        ctx.fillStyle = "#000000";
-      }
-      ctx.fillRect(5, 5, character.hp * 2, 10);
+      if (!character.hp < 500) {
+        if (character.hp > 250) {
+          ctx.fillStyle = "#ADFF2F";
+        } else if (character.hp > 100) {
+          ctx.fillStyle = "#FF4500";
+        } else {
+          ctx.fillStyle = "#000000";
+        }
+        ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
+    }
     }
 
     function drawLevel(level) {

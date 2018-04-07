@@ -17,7 +17,7 @@ class Character {
       y: 60
     }
 
-    this.hp = 100;
+    this.hp = 500;
 
     this.height = GRID_SIZE * 2;
     this.width = GRID_SIZE;
@@ -77,8 +77,8 @@ class Character {
     }
 
     if (isHurt(level, this.position.x, this.position.y + this.height + 0.1) || isHurt(level, this.position.x + this.width, this.position.y + this.height + 0.1)) {
-        this.hp -= 1;
-    } else if (this.hp < 100) {
+        this.hp -= 3;
+    } else if (this.hp < 500) {
         this.hp += 1;
     }
 
