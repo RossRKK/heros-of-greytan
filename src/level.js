@@ -35,9 +35,6 @@ function getTile(level,x , y) {
     let gridY = Math.floor(y / GRID_SIZE);
 
     if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
-<<<<<<< HEAD
-        return level.grid[gridX][gridY];
-=======
         return level.grid[gridX][gridY] ? level.grid[gridX][gridY].isSolid : false;
     } else {
         return true;
@@ -50,7 +47,6 @@ function isHurt(level, x, y) {
 
     if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
         return level.grid[gridX][gridY] ? level.grid[gridX][gridY].isKillBlock : false;
->>>>>>> ed39166e8078f7d9d8e11a7886876ea206e78487
     } else {
         return undefined;
     }
