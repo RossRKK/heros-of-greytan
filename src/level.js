@@ -1,21 +1,14 @@
 class GridCell {
-<<<<<<< HEAD
-  constructor (background, imgSrc, solid, mask) {
-=======
-  constructor (background, imgSrc, isSolid, isKillBlock) {
->>>>>>> ed39166e8078f7d9d8e11a7886876ea206e78487
+
+    constructor (background, imgSrc, isSolid, mask, isKillBlock) {
     this.background = background;
 
     this.img = document.createElement("img");
     this.img.src = imgSrc;
 
-<<<<<<< HEAD
-    this.solid = solid;
-    this.mask = mask;
-=======
     this.isSolid = isSolid;
     this.isKillBlock = isKillBlock;
->>>>>>> ed39166e8078f7d9d8e11a7886876ea206e78487
+    this.mask = mask;
   }
 
   //draw the grid cell
