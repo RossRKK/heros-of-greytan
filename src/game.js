@@ -33,7 +33,20 @@ var Game = function () {
            [null, null, null, null, null, null, water],
            [null, null, null, null, null, null, water],
            [null, null, null, null, null, null, water],
-           [speedMask, null, null, null, null, null, water]]
+           [speedMask, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, water],
+           [null, null, null, null, null, null, grass],
+           [null, null, null, null, null, null, grass],
+           [null, null, null, null, null, null, grass]]
   }
 
   let adjectives = [

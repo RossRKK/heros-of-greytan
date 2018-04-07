@@ -12,7 +12,7 @@ class upsideDownMan extends Character {
 	}
 
 	action() {
-		this.engaged = !this.engaged
+		this.engaged = !this.engaged;
 		this.gravity = -this.gravity;
 
 		if (this.engaged) {this.img.src = "textures/BobUpsideDownUpsideDown.png";}
@@ -30,5 +30,12 @@ class speedMan extends Character {
 		this.mask = "SM";
 		this.img.src = "textures/BobSpeed.png";
 		this.engaged = false;
+	}
+
+	action() {
+		this.engaged = !this.engaged;
+
+		if (this.engaged) {this.horizontalMaxSpeed = 10;}
+		else {this.horizontalMaxSpeed = 5;}
 	}
 }
