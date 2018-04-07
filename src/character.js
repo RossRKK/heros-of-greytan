@@ -16,6 +16,9 @@ class Character {
     }
 
     this.hp = 10;
+
+    this.height = GRID_SIZE * 2;
+    this.width = GRID_SIZE;
   }
 
   //Game loops every 0.1 secs
@@ -51,15 +54,24 @@ class Character {
 }
 
   //move adds velocity to the character in the given direction
-  move(dir) {
+  move(level) {
       this.position.x += this.velocity.x;
-      this.position.y += this.velocity.y;
+
+      let x = this.position.x + this.velocity.x;
+      let y = this.position.y + this.velocity.y;
+
+      if (!isObstructed(level, x, y) && !isObstructed(level, x + this.width, y)
+        && !isObstructed(level, x, y + this.height) && !isObstructed(level, x + this.width, y + this.height)) {
+          this.position.y = y;
+      } else {
+          this.position.y = Math.round(y/GRID_SIZE) * GRID_SIZE;
+      }
   }
 
   //draw the character
   draw(ctx) {
     //draw the character
     ctx.fillStyle = "red";
-    ctx.fillRect(this.position.x, this.position.y, GRID_SIZE, 2 * GRID_SIZE);
+    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 }

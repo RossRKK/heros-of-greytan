@@ -19,3 +19,10 @@ class GridCell {
     }
   }
 }
+
+function isObstructed(level, x, y) {
+    let gridX = Math.floor(x / GRID_SIZE);
+    let gridY = Math.floor(y / GRID_SIZE);
+
+    return level.grid[gridX][gridY] ? level.grid[gridX][gridY].solid : false;
+}

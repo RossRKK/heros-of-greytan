@@ -14,9 +14,9 @@ var Game = function () {
 
   let level = {
     background: "#68a2ff",
-    grid: [[null, grass],
-           [null, grass],
-           [null, grass]]
+    grid: [[null, null, null, grass],
+           [null, null, null, grass],
+           [null, null, null, grass]]
   }
 
   //generate the name of the gamedw
@@ -72,7 +72,7 @@ var Game = function () {
       if (!keyTracker.up && !keyTracker.down) {
         character.accelerate("VERTICAL");
       }
-      character.move();
+      character.move(level);
 
       // RenderEngine.render(character, level);
 
