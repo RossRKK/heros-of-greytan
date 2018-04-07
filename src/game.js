@@ -34,6 +34,26 @@ var Game = function () {
     RenderEngine.render(character, level);
   }
 
+  function isALive() {
+      if (character.hp = 0) {
+          return false;
+      } else {
+          return true;
+      }
+  }
+
+  function hasEnded() {
+
+  }
+
+  function gameLoop() {
+      while (isAlive() && !hasEnded()) {
+          character.move();
+      }
+  }
+
+
+
   return {
     init: init
   }

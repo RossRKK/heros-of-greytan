@@ -20,6 +20,8 @@ class Character {
       x: 0,
       y: 0
     }
+
+    this.hp = 10;
   }
 
   //Assumes game loop every 0.1 secs
