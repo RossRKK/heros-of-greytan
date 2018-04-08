@@ -84,8 +84,14 @@ class speedMan extends Character {
 	action() {
 		this.engaged = !this.engaged;
 
-		if (this.engaged) {this.horizontalMaxSpeed = 10;}
-		else {this.horizontalMaxSpeed = 5;}
+		if (this.engaged) {
+			this.horizontalMaxSpeed = 10;
+			this.img.src = "textures/BobSpeedFeet.png";
+		}
+		else {
+			this.horizontalMaxSpeed = 5;
+			this.img.src = "textures/BobSpeed.png";
+		}
 	}
 }
 
