@@ -54,9 +54,22 @@ var Events = function () {
 		console.log(e);
 		switch (e.keyCode) {
 			case 32:
-				Game.getCharacter().action();
+				Game.getCharacter().action(Game.getLevel());
 				break;
 		}
+	}
+
+	var mouseTracker = {
+		x: 0,
+		y: 0
+	}
+
+	//keep track of the mouse position
+	function mouseMove(e) {
+		let bounds = document.getElementById("canvas").getBoundingClientRect();
+
+		mouseTracker.x = e.clientX - RenderEngine.getTranX() - bounds.left;
+		mouseTracker.y = e.clientY - RenderEngine.getTranY() - bounds.top;
 	}
 
 	//initialise event handlers
@@ -64,10 +77,12 @@ var Events = function () {
 		$(document).on("keydown", keyDown);
 		$(document).on("keyup", keyUp);
 		$(document).on("keypress", keyPress);
+		$(document).on("mousemove", mouseMove);
 	}
 
 	return {
 		init: init,
-		getKeyTracker: function () { return keyTracker }
+		getKeyTracker: function () { return keyTracker },
+		getMouseTracker: function () { return mouseTracker }
 	}
 }();
