@@ -24,6 +24,10 @@ class upsideDownMan extends Character {
 			this.engaged = false;
 			this.img.src = this.img.src = "textures/BobUpsideDown.png";
 		}
+
+		if (this.engaged) {
+			this.flipFlag = 0;
+		}
 	}
 
 	updatePosition(keyTracker, level) {
@@ -52,20 +56,12 @@ class upsideDownMan extends Character {
               }
             ctx.fillRect(this.position.x -10, this.position.y + level.GRID_SIZE, 5, GRID_SIZE * (this.engagedBuffer) / 500);
         }
-
-        if (this.engaged && this.mask === "SM") {
-          zoom = document.createElement("img");
-          zoom.src = "textures/Zoom!.png";
-          if (zoomFlag) {
-              ctx.drawImage(zoom, this.position.x - 30, this.position.y + 130);
-          }
-          setTimeout(function(){zoomFlag = false}, 500);
-        }
-        else if (!this.engaged && this.mask === "SM") {
-            zoomFlag = true;
-            ctx.fillStyle =  "#ADFF2F";
-            ctx.fillRect(this.position.x -10, this.position.y + GRID_SIZE, 5, GRID_SIZE * (this.engagedBuffer) / 500);
-        }
+		if (this.flipFlag < 50) {
+			var zoom = document.createElement("img");
+		 	zoom.src = "textures/Flip!.png";
+			ctx.drawImage(zoom, this.position.x - 30, this.position.y + 130);
+			this.flipFlag += 1;
+		}
 	}
 }
 
@@ -79,13 +75,34 @@ class speedMan extends Character {
 		this.mask = "SM";
 		this.img.src = "textures/BobSpeed.png";
 		this.engaged = false;
+		this.zoomFlag = 50;
 	}
 
 	action() {
 		this.engaged = !this.engaged;
 
-		if (this.engaged) {this.horizontalMaxSpeed = 10;}
-		else {this.horizontalMaxSpeed = 5;}
+		if (this.engaged) {
+			this.horizontalMaxSpeed = 10;
+			this.img.src = "textures/BobSpeedFeet.png";
+		}
+		else {
+			this.horizontalMaxSpeed = 5;
+			this.img.src = "textures/BobSpeed.png";
+		}
+
+		if (this.engaged) {
+			this.zoomFlag = 0;
+		}
+	}
+
+	drawHUD(ctx, level) {
+		super.drawHUD(ctx, level);
+		if (this.zoomFlag < 50) {
+			var zoom = document.createElement("img");
+		 	zoom.src = "textures/Zoom!.png";
+			ctx.drawImage(zoom, this.position.x - 30, this.position.y + 130);
+			this.zoomFlag += 1;
+		}
 	}
 }
 
