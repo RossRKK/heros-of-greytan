@@ -148,12 +148,22 @@ class grappleGuy extends Character {
 
 				let angle = Math.atan(m);
 
-				if (m > 0) {
-					this.velocity.x -= this.grappleForce * Math.cos(angle);
-					this.velocity.y -= this.grappleForce * Math.sin(angle);
+				if ((this.position.y + this.height / 2) > this.target.y) {
+					if (m > 0) {
+						this.velocity.x -= this.grappleForce * Math.cos(angle);
+						this.velocity.y -= this.grappleForce * Math.sin(angle);
+					} else {
+						this.velocity.x += this.grappleForce * Math.cos(angle);
+						this.velocity.y += this.grappleForce * Math.sin(angle);
+					}
 				} else {
-					this.velocity.x += this.grappleForce * Math.cos(angle);
-					this.velocity.y += this.grappleForce * Math.sin(angle);
+					if (m > 0) {
+						this.velocity.x += this.grappleForce * Math.cos(angle);
+						this.velocity.y += this.grappleForce * Math.sin(angle);
+					} else {
+						this.velocity.x -= this.grappleForce * Math.cos(angle);
+						this.velocity.y -= this.grappleForce * Math.sin(angle);
+					}
 				}
 			}
 		}
