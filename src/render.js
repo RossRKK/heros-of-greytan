@@ -57,7 +57,7 @@ var RenderEngine = function () {
               }
               ctx.fillRect(character.position.x -10, character.position.y + level.GRID_SIZE, 5, GRID_SIZE * (character.engagedBuffer) / 500);
             }
-            
+
         if (character.engaged && character.mask === "SM") {
           zoom = document.createElement("img");
           zoom.src = "textures/Zoom!.png";
