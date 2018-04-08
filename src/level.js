@@ -29,7 +29,7 @@ function isObstructed(level, x, y) {
     return tile.isSolid;
 }
 
-function getTile(level,x , y) {
+function getTile(level, x , y) {
     let gridX = Math.floor(x / GRID_SIZE);
     let gridY = Math.floor(y / GRID_SIZE);
 
@@ -67,6 +67,9 @@ class MaskCell extends GridCell {
                 break;
             case "SM":
                 this.img.src = "textures/speedBoiHigh.png";
+                break;
+            case "GG":
+                this.img.src = "textures/GrapplePersonHigh.png";
                 break;
             default:
                 this.img.src = null;
