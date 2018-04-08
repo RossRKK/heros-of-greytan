@@ -41,7 +41,7 @@ var RenderEngine = function () {
         ctx.restore();
 
         if (Game.isEditing()) {
-            drawBlockOptions();
+            drawBlockOptions(level);
         }
     }
 
@@ -84,13 +84,13 @@ var RenderEngine = function () {
         ctx.stroke();
     }
 
-    function drawBlockOptions() {
+    function drawBlockOptions(level) {
         const margin = 20;
         ctx.fillStyle = "#919191";
-        ctx.fillRect(CANVAS_WIDTH - GRID_SIZE - (2 * margin), 0, GRID_SIZE + (2 * margin), CANVAS_HEIGHT);
+        ctx.fillRect(CANVAS_WIDTH - level.GRID_SIZE - (2 * margin), 0, level.GRID_SIZE + (2 * margin), CANVAS_HEIGHT);
         for (let i = 0; i < Game.getBlocks().length; i++) {
             try {
-            ctx.drawImage(Game.getBlocks()[i].img, CANVAS_WIDTH - GRID_SIZE - margin, (margin + (i * (GRID_SIZE + margin))), GRID_SIZE, GRID_SIZE);
+            ctx.drawImage(Game.getBlocks()[i].img, CANVAS_WIDTH - level.GRID_SIZE - margin, (margin + (i * (level.GRID_SIZE + margin))), level.GRID_SIZE, level.GRID_SIZE);
         } catch (Ex) {
             //shut up
         }
