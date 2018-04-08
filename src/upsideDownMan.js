@@ -41,6 +41,32 @@ class upsideDownMan extends Character {
 			this.engagedBuffer += 1;
 		}
 	}
+
+	drawHUD(ctx, level) {
+		super.drawHUD(ctx, level);
+		if (this.mask !== null) {
+            if (this.engagedBuffer < 500) {
+                ctx.fillStyle = "#FF4500";
+              } else {
+                  ctx.fillStyle = "#ADFF2F";
+              }
+            ctx.fillRect(this.position.x -10, this.position.y + level.GRID_SIZE, 5, GRID_SIZE * (this.engagedBuffer) / 500);
+        }
+            
+        if (this.engaged && this.mask === "SM") {
+          zoom = document.createElement("img");
+          zoom.src = "textures/Zoom!.png";
+          if (zoomFlag) {
+              ctx.drawImage(zoom, this.position.x - 30, this.position.y + 130);
+          }
+          setTimeout(function(){zoomFlag = false}, 500);
+        }
+        else if (!this.engaged && this.mask === "SM") {
+            zoomFlag = true;
+            ctx.fillStyle =  "#ADFF2F";
+            ctx.fillRect(this.position.x -10, this.position.y + GRID_SIZE, 5, GRID_SIZE * (this.engagedBuffer) / 500);
+        }
+	}
 }
 
 class speedMan extends Character {

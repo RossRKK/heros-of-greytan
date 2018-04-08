@@ -100,6 +100,19 @@ class Character {
 
 }
 
+    drawHUD(ctx, level) {
+        if (this.hp < 500 || this.hpBuffer < 150) {
+            if (this.hp > 250) {
+              ctx.fillStyle = "#ADFF2F";
+            } else if (this.hp > 100) {
+              ctx.fillStyle = "#FF4500";
+            } else {
+              ctx.fillStyle = "#000000";
+            }
+            ctx.fillRect(this.position.x, this.position.y - 10, level.GRID_SIZE * (this.hp / 500), 5);
+        }
+    }
+
   //move adds velocity to the character in the given direction
   move(level) {
       //this.position.x += this.velocity.x;
