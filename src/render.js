@@ -49,7 +49,7 @@ var RenderEngine = function () {
             }
             ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
         }
-        if (character.engaged && character.mask !== null) {
+        if (character.engaged && character.mask === "SM") {
           if (character.engagedBuffer < 500) {
             ctx.fillStyle = "#FF4500";
             ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (character.engagedBuffer) / 500);
