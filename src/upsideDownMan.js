@@ -100,7 +100,7 @@ class grappleGuy extends Character {
 		this.img.src = "textures/BobGrapple.png";
 		this.engaged = false;
 
-		this.grapleForce = 0.1;
+		this.grappleForce = 1;
 	}
 
 	action(level) {
@@ -128,12 +128,16 @@ class grappleGuy extends Character {
 				this.cancelAction();
 			} else {
 				let m = ((this.position.y + this.height / 2) - this.target.y) / ((this.position.x + this.width / 2) - this.target.x);
-				this.velocity.x -= this.grapleForce / m;
-				this.velocity.y += this.grapleForce * m;
 
-				//limit the graple velocity
-				this.velocity.x = this.velocity.x > this.horizontalMaxSpeed ? this.horizontalMaxSpeed : this.velocity.x;
-				this.velocity.y = this.velocity.y > this.verticalMaxSpeed ? this.verticalMaxSpeed : this.velocity.y;
+				let angle = Math.atan(m);
+
+				if (m > 0) {
+					this.velocity.x -= this.grappleForce * Math.cos(angle);
+					this.velocity.y -= this.grappleForce * Math.sin(angle);
+				} else {
+					this.velocity.x += this.grappleForce * Math.cos(angle);
+					this.velocity.y += this.grappleForce * Math.sin(angle);
+				}
 			}
 		}
 
