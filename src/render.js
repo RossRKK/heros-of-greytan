@@ -60,7 +60,6 @@ var RenderEngine = function () {
               ctx.drawImage(zoom, character.position.x - 30, character.position.y + 130);
           }
           setTimeout(function(){zoomFlag = false}, 500);
-=======
         }
         else if (!character.engaged && character.mask === "SM") {
             zoomFlag = true;
