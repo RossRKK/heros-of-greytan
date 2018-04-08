@@ -24,6 +24,10 @@ class upsideDownMan extends Character {
 			this.engaged = false;
 			this.img.src = this.img.src = "textures/BobUpsideDown.png";
 		}
+
+		if (this.engaged) {
+			this.flipFlag = 0;
+		}
 	}
 
 	updatePosition(keyTracker, level) {
@@ -52,20 +56,12 @@ class upsideDownMan extends Character {
               }
             ctx.fillRect(this.position.x -10, this.position.y + this.GRID_SIZE, 5, this.GRID_SIZE * (this.engagedBuffer) / 500);
         }
-            
-        if (this.engaged && this.mask === "SM") {
-          zoom = document.createElement("img");
-          zoom.src = "textures/Zoom!.png";
-          if (zoomFlag) {
-              ctx.drawImage(zoom, this.position.x - 30, this.position.y + 130);
-          }
-          setTimeout(function(){zoomFlag = false}, 500);
-        }
-        else if (!this.engaged && this.mask === "SM") {
-            zoomFlag = true;
-            ctx.fillStyle =  "#ADFF2F";
-            ctx.fillRect(this.position.x -10, this.position.y + this.GRID_SIZE, 5, this.GRID_SIZE * (this.engagedBuffer) / 500);
-        }
+		if (this.flipFlag < 50) {
+			var zoom = document.createElement("img");
+		 	zoom.src = "textures/Flip!.png";
+			ctx.drawImage(zoom, this.position.x - 30, this.position.y + 130);
+			this.flipFlag += 1;
+		}
 	}
 }
 
@@ -79,6 +75,7 @@ class speedMan extends Character {
 		this.mask = "SM";
 		this.img.src = "textures/BobSpeed.png";
 		this.engaged = false;
+		this.zoomFlag = 50;
 	}
 
 	action() {
@@ -91,6 +88,20 @@ class speedMan extends Character {
 		else {
 			this.horizontalMaxSpeed = 10;
 			this.img.src = "textures/BobSpeed.png";
+		}
+
+		if (this.engaged) {
+			this.zoomFlag = 0;
+		}
+	}
+
+	drawHUD(ctx, level) {
+		super.drawHUD(ctx, level);
+		if (this.zoomFlag < 50) {
+			var zoom = document.createElement("img");
+		 	zoom.src = "textures/Zoom!.png";
+			ctx.drawImage(zoom, this.position.x - 30, this.position.y + 130);
+			this.zoomFlag += 1;
 		}
 	}
 }
@@ -106,7 +117,7 @@ class grappleGuy extends Character {
 		this.img.src = "textures/BobGrapple.png";
 		this.engaged = false;
 
-		this.grapleForce = 0.2;
+		this.grappleForce = 1;
 	}
 
 	action(level) {
@@ -134,8 +145,26 @@ class grappleGuy extends Character {
 				this.cancelAction();
 			} else {
 				let m = ((this.position.y + this.height / 2) - this.target.y) / ((this.position.x + this.width / 2) - this.target.x);
-				this.velocity.x += this.grapleForce / m;
-				this.velocity.y += this.grapleForce * m;
+
+				let angle = Math.atan(m);
+
+				if ((this.position.y + this.height / 2) > this.target.y) {
+					if (m > 0) {
+						this.velocity.x -= this.grappleForce * Math.cos(angle);
+						this.velocity.y -= this.grappleForce * Math.sin(angle);
+					} else {
+						this.velocity.x += this.grappleForce * Math.cos(angle);
+						this.velocity.y += this.grappleForce * Math.sin(angle);
+					}
+				} else {
+					if (m > 0) {
+						this.velocity.x += this.grappleForce * Math.cos(angle);
+						this.velocity.y += this.grappleForce * Math.sin(angle);
+					} else {
+						this.velocity.x -= this.grappleForce * Math.cos(angle);
+						this.velocity.y -= this.grappleForce * Math.sin(angle);
+					}
+				}
 			}
 		}
 

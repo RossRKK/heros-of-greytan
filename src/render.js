@@ -6,8 +6,11 @@ var RenderEngine = function () {
     let tranX;
     let tranY;
 
+    let backgroundImg = document.createElement("img");
+
     function init() {
         ctx = document.getElementById('canvas').getContext('2d');
+        backgroundImg.src = "textures/void.png";
     }
 
     //render the level
@@ -17,6 +20,8 @@ var RenderEngine = function () {
 
         ctx.fillStyle = "#CCCCCC";
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        ctx.drawImage(backgroundImg, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         ctx.save();
 
@@ -37,41 +42,6 @@ var RenderEngine = function () {
     }
 
     var zoomFlag;
-
-    function drawHUD(character, level) {
-        if (character.hp < 500 || character.hpBuffer < 150) {
-            if (character.hp > 250) {
-              ctx.fillStyle = "#ADFF2F";
-            } else if (character.hp > 100) {
-              ctx.fillStyle = "#FF4500";
-            } else {
-              ctx.fillStyle = "#000000";
-            }
-            ctx.fillRect(character.position.x, character.position.y - 10, level.GRID_SIZE * (character.hp / 500), 5);
-        }
-        if (character.mask !== null) {
-            if (character.engagedBuffer < 500) {
-                ctx.fillStyle = "#FF4500";
-              } else {
-                  ctx.fillStyle = "#ADFF2F";
-              }
-              ctx.fillRect(character.position.x -10, character.position.y + level.GRID_SIZE, 5, GRID_SIZE * (character.engagedBuffer) / 500);
-            }
-
-        if (character.engaged && character.mask === "SM") {
-          zoom = document.createElement("img");
-          zoom.src = "textures/Zoom!.png";
-          if (zoomFlag) {
-              ctx.drawImage(zoom, character.position.x - 30, character.position.y + 130);
-          }
-          setTimeout(function(){zoomFlag = false}, 500);
-        }
-        else if (!character.engaged && character.mask === "SM") {
-            zoomFlag = true;
-            ctx.fillStyle =  "#ADFF2F";
-            ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (character.engagedBuffer) / 500);
-        }
-    }
 
     function drawLevel(level) {
         //draw a background
