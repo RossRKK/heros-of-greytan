@@ -11,13 +11,13 @@ class GridCell {
   }
 
   //draw the grid cell
-  draw(ctx, x, y) {
+  draw(ctx, x, y, level) {
       //draw an image if it's available
       if (this.img.src) {
-        ctx.drawImage(this.img, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+        ctx.drawImage(this.img, x * level.GRID_SIZE, y * level.GRID_SIZE, level.GRID_SIZE, level.GRID_SIZE);
       } else {
           ctx.fillStyle = this.background;
-          ctx.fillRect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+          ctx.fillRect(x * level.GRID_SIZE, y * level.GRID_SIZE, level.GRID_SIZE, level.GRID_SIZE);
       }
   }
 }
@@ -30,8 +30,8 @@ function isObstructed(level, x, y) {
 }
 
 function getTile(level, x , y) {
-    let gridX = Math.floor(x / GRID_SIZE);
-    let gridY = Math.floor(y / GRID_SIZE);
+    let gridX = Math.floor(x / level.GRID_SIZE);
+    let gridY = Math.floor(y / level.GRID_SIZE);
 
     if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
         return level.grid[gridX][gridY];
@@ -41,8 +41,8 @@ function getTile(level, x , y) {
 }
 
 function isHurt(level, x, y) {
-  let gridX = Math.floor(x / GRID_SIZE);
-    let gridY = Math.floor(y / GRID_SIZE);
+  let gridX = Math.floor(x / level.GRID_SIZE);
+    let gridY = Math.floor(y / level.GRID_SIZE);
 
     if (gridX >= 0 && gridX < level.grid.length && gridY >= 0 && gridY < level.grid[gridX].length) {
         return level.grid[gridX][gridY] ? level.grid[gridX][gridY].isKillBlock : false;
@@ -77,10 +77,10 @@ class MaskCell extends GridCell {
     }
 
     //draw the grid cell
-    draw(ctx, x, y) {
+    draw(ctx, x, y, level) {
         //draw an image if it's available
         if (this.mask !== null) {
-          ctx.drawImage(this.img, x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+          ctx.drawImage(this.img, x * level.GRID_SIZE, y * level.GRID_SIZE, level.GRID_SIZE, level.GRID_SIZE);
         }
     }
 }
