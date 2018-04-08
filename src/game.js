@@ -12,43 +12,7 @@ var Game = function () {
 
   let name;
 
-  grass = new GridCell("green", "textures/grass2.png", true, false);
-  water = new GridCell("green", "textures/water.png", false, true);
-  tower = new GridCell("green", "textures/tower.png", true, false);
-  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
-  upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
-  speedMask = new MaskCell("#68a2ff", false, false, "SM");
-  grappleMask = new MaskCell("68a2ff", false, false, "GG");
-
-  let level = {
-    background: "#68a2ff",
-    grid: [[upsideDownMask, null, null, tower, tower, tower, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, grass, grass],
-           [grappleMask, null, null, null, tree, grass, grass],
-           [null, null, null, null, null, grass, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [speedMask, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, water],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass],
-           [null, null, null, null, null, null, grass]]
-  }
+  let level = getBasicLevel();  
 
   function changeLevel(xClick, yClick) {
       // alert(xClick);
@@ -60,8 +24,8 @@ var Game = function () {
           xClick = xClick - RenderEngine.getTranX() - bounds.left;
           yClick = yClick - RenderEngine.getTranY() - bounds.top;
 
-          blockXPos = Math.floor(xClick / GRID_SIZE);
-          blockYPos = Math.floor(yClick / GRID_SIZE);
+          blockXPos = Math.floor(xClick / level.GRID_SIZE);
+          blockYPos = Math.floor(yClick / level.GRID_SIZE);
 
           /*alert(xClick);
           alert(blockXPos);*/
@@ -69,6 +33,53 @@ var Game = function () {
           level.grid[blockXPos][blockYPos] = grass;
       }
   }
+
+  function getBasicLevel() {
+    grass = new GridCell("green", "textures/grass2.png", true, false);
+    water = new GridCell("green", "textures/water.png", false, true);
+    tower = new GridCell("green", "textures/tower.png", true, false);
+    tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+    upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
+    speedMask = new MaskCell("#68a2ff", false, false, "SM");
+    grappleMask = new MaskCell("68a2ff", false, false, "GG");
+  
+    let level = {
+      background: "#68a2ff",
+      GRID_SIZE: 60,
+      grid: [[upsideDownMask, null, null, tower, tower, tower, grass],
+             [null, null, null, null, null, null, grass],
+             [null, null, null, null, null, null, grass],
+             [null, null, null, null, null, grass, grass],
+             [grappleMask, null, null, null, tree, grass, grass],
+             [null, null, null, null, null, grass, grass],
+             [null, null, null, null, null, null, grass],
+             [null, null, null, null, null, null, grass],
+             [null, null, null, null, null, null, grass],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [speedMask, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, water],
+             [null, null, null, null, null, null, grass],
+             [null, null, null, null, null, null, grass],
+             [null, null, null, null, null, null, grass]]
+    }
+
+    return level;
+}
+
+    function getSimonLevel() {
+
+    }
 
   function getMousePos(event) {
       changeLevel(event.clientX, event.clientY);

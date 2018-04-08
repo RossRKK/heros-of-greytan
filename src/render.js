@@ -32,11 +32,11 @@ var RenderEngine = function () {
         //draw the character
         character.draw(ctx);
 
-        drawHUD(character);
+        drawHUD(character, level);
         ctx.restore();
     }
 
-    function drawHUD(character) {
+    function drawHUD(character, level) {
         if (character.hp < 500 || character.hpBuffer < 150) {
             if (character.hp > 250) {
               ctx.fillStyle = "#ADFF2F";
@@ -45,25 +45,22 @@ var RenderEngine = function () {
             } else {
               ctx.fillStyle = "#000000";
             }
-            ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
+            ctx.fillRect(character.position.x, character.position.y - 10, level.GRID_SIZE * (character.hp / 500), 5);
         }
-        if (character.engaged && character.mask !== null) {
+        if (character.mask !== null) {
           if (character.engagedBuffer < 500) {
             ctx.fillStyle = "#FF4500";
-            ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (character.engagedBuffer) / 500);
+          } else {
+              ctx.fillStyle = "#ADFF2F";
           }
+          ctx.fillRect(character.position.x -10, character.position.y + level.GRID_SIZE, 5, GRID_SIZE * (character.engagedBuffer) / 500);
         }
-        else if (!character.engaged && character.mask !== null) {
-            ctx.fillStyle =  "#ADFF2F";
-            ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (character.engagedBuffer) / 500);
-        }
-        ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
     }
 
     function drawLevel(level) {
         //draw a background
         ctx.fillStyle = level.background;
-        ctx.fillRect(0, 0, level.grid.length * GRID_SIZE, level.grid[0].length * GRID_SIZE);
+        ctx.fillRect(0, 0, level.grid.length * level.GRID_SIZE, level.grid[0].length * GRID_SIZE);
 
         //draw the grid
         drawGrid(level);
@@ -86,20 +83,21 @@ var RenderEngine = function () {
     function drawGrid(level) {
         ctx.beginPath();
         for (let i = 0; i <= level.grid.length; i ++) {
-            ctx.moveTo(i * GRID_SIZE, 0);
-            ctx.lineTo(i * GRID_SIZE, level.grid[0].length * GRID_SIZE);
+            ctx.moveTo(i * level.GRID_SIZE, 0);
+            ctx.lineTo(i * level.GRID_SIZE, level.grid[0].length * GRID_SIZE);
         }
 
         for (let i = 0; i <= level.grid[0].length; i ++) {
-            ctx.moveTo(0, i * GRID_SIZE);
-            ctx.lineTo(level.grid.length * GRID_SIZE, i * GRID_SIZE);
+            ctx.moveTo(0, i * level.GRID_SIZE);
+            ctx.lineTo(level.grid.length * level.GRID_SIZE, i * level.GRID_SIZE);
         }
         ctx.stroke();
     }
 
     function drawDeath(character) {
       alert("You died");
-      Game.init();
+      //Game.init();
+      location.reload();
     }
 
     return {

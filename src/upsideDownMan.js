@@ -15,6 +15,7 @@ class upsideDownMan extends Character {
 	action() {
 		if (!this.engaged && this.engagedBuffer === 500) {
 			this.gravity = -this.gravity;
+			this.engagedBuffer -= 250;
 			this.engaged = true;
 			this.img.src = "textures/BobUpsideDownUpsideDown.png";
 		} else if (this.engaged) {
