@@ -81,8 +81,14 @@ class speedMan extends Character {
 	action() {
 		this.engaged = !this.engaged;
 
-		if (this.engaged) {this.horizontalMaxSpeed = 10;}
-		else {this.horizontalMaxSpeed = 5;}
+		if (this.engaged) {
+			this.horizontalMaxSpeed = 10;
+			this.img.src = "textures/BobSpeedFeet.png";
+		}
+		else {
+			this.horizontalMaxSpeed = 5;
+			this.img.src = "textures/BobSpeed.png";
+		}
 
 		if (this.engaged) {
 			this.zoomFlag = 0;
@@ -91,14 +97,6 @@ class speedMan extends Character {
 
 	drawHUD(ctx, level) {
 		super.drawHUD(ctx, level);
-		if (this.mask !== null) {
-			if (this.engagedBuffer < 500) {
-				ctx.fillStyle = "#FF4500";
-			  } else {
-				  ctx.fillStyle = "#ADFF2F";
-			  }
-			ctx.fillRect(this.position.x -10, this.position.y + level.GRID_SIZE, 5, GRID_SIZE * (this.engagedBuffer) / 500);
-		}
 		if (this.zoomFlag < 50) {
 			var zoom = document.createElement("img");
 		 	zoom.src = "textures/Zoom!.png";
