@@ -1,5 +1,3 @@
-const GRID_SIZE = 60;
-
 $(function () {
   RenderEngine.init();
   Game.init();
@@ -149,7 +147,7 @@ var Game = function () {
   function init() {
     genName();
 
-    character = new Character();
+    character = new Character(level.GRID_SIZE);
 
     update();
     renderGame();
@@ -176,7 +174,7 @@ var Game = function () {
   let canSwap = true;
 
   function switchMask(level, character) {
-      tile = getTile(level, character.position.x + (GRID_SIZE / 2), character.position.y + (GRID_SIZE / 2));
+      tile = getTile(level, character.position.x + (level.GRID_SIZE / 2), character.position.y + (level.GRID_SIZE / 2));
 
       if (tile && canSwap) {
           switch (tile.mask) {

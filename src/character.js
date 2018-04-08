@@ -1,8 +1,8 @@
 class Character {
 
-  constructor () {
-    this.horizontalMaxSpeed = 5;
-    this.verticalMaxSpeed = 6;
+  constructor (GRID_SIZE) {
+    this.horizontalMaxSpeed = 10;
+    this.verticalMaxSpeed = 10;
     this.gravity = 18;
 
     //Velocity = Length moved/game loop length
@@ -20,8 +20,10 @@ class Character {
     this.hp = 500;
     this.hpBuffer = 150;
 
-    this.height = GRID_SIZE * 2;
-    this.width = GRID_SIZE;
+    this.GRID_SIZE = GRID_SIZE;
+
+    this.height = this.GRID_SIZE * 2;
+    this.width = this.GRID_SIZE;
 
     this.mask = null;
     this.img = document.createElement("img");
@@ -117,13 +119,13 @@ class Character {
   move(level) {
       //this.position.x += this.velocity.x;
 
-      let x = this.position.x + this.velocity.x;
-      let y = this.position.y + this.velocity.y;
+      let x = this.position.x + ((this.velocity.x / 5) * this.GRID_SIZE) / 30;
+      let y = this.position.y + ((this.velocity.y / 6) * this.GRID_SIZE) / 30;
 
       if (!isObstructed(level, x + (this.width / 2), y) && !isObstructed(level, x + (this.width / 2), y + this.height)) {
           this.position.y = y;
       } else {
-          this.position.y = Math.round(y/GRID_SIZE) * GRID_SIZE;
+          this.position.y = Math.round(y/this.GRID_SIZE) * this.GRID_SIZE;
           this.velocity.y = 0;
       }
 
@@ -131,7 +133,7 @@ class Character {
         && !isObstructed(level, x, y + (this.height / 4)) && !isObstructed(level, x + this.width, y + (this.height / 4))) {
           this.position.x = x;
       } else {
-          this.position.x = Math.round(x/GRID_SIZE) * GRID_SIZE;
+          this.position.x = Math.round(x/this.GRID_SIZE) * this.GRID_SIZE;
           this.velocity.x = 0;
       }
   }
