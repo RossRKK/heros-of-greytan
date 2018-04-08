@@ -3,7 +3,7 @@ class Character {
   constructor (GRID_SIZE) {
     this.horizontalMaxSpeed = 10;
     this.verticalMaxSpeed = 10;
-    this.gravity = 18;
+    this.gravity = 30;
 
     //Velocity = Length moved/game loop length
     this.velocity = {
@@ -119,8 +119,8 @@ class Character {
   move(level) {
       //this.position.x += this.velocity.x;
 
-      let x = this.position.x + ((this.velocity.x / 5) * this.GRID_SIZE) / 30;
-      let y = this.position.y + ((this.velocity.y / 6) * this.GRID_SIZE) / 30;
+      let x = this.position.x + ((this.velocity.x / 5) * this.GRID_SIZE) / 20;
+      let y = this.position.y + ((this.velocity.y / 6) * this.GRID_SIZE) / 20;
 
       if (!isObstructed(level, x + (this.width / 2), y) && !isObstructed(level, x + (this.width / 2), y + this.height)) {
           this.position.y = y;
