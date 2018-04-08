@@ -52,7 +52,7 @@ class upsideDownMan extends Character {
               }
             ctx.fillRect(this.position.x -10, this.position.y + level.GRID_SIZE, 5, GRID_SIZE * (this.engagedBuffer) / 500);
         }
-            
+
         if (this.engaged && this.mask === "SM") {
           zoom = document.createElement("img");
           zoom.src = "textures/Zoom!.png";
@@ -100,7 +100,7 @@ class grappleGuy extends Character {
 		this.img.src = "textures/BobGrapple.png";
 		this.engaged = false;
 
-		this.grapleForce = 0.2;
+		this.grapleForce = 0.1;
 	}
 
 	action(level) {
@@ -128,8 +128,12 @@ class grappleGuy extends Character {
 				this.cancelAction();
 			} else {
 				let m = ((this.position.y + this.height / 2) - this.target.y) / ((this.position.x + this.width / 2) - this.target.x);
-				this.velocity.x += this.grapleForce / m;
+				this.velocity.x -= this.grapleForce / m;
 				this.velocity.y += this.grapleForce * m;
+
+				//limit the graple velocity
+				this.velocity.x = this.velocity.x > this.horizontalMaxSpeed ? this.horizontalMaxSpeed : this.velocity.x;
+				this.velocity.y = this.velocity.y > this.verticalMaxSpeed ? this.verticalMaxSpeed : this.velocity.y;
 			}
 		}
 

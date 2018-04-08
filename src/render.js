@@ -6,8 +6,11 @@ var RenderEngine = function () {
     let tranX;
     let tranY;
 
+    let backgroundImg = document.createElement("img");
+
     function init() {
         ctx = document.getElementById('canvas').getContext('2d');
+        backgroundImg.src = "textures/void.png";
     }
 
     //render the level
@@ -17,6 +20,8 @@ var RenderEngine = function () {
 
         ctx.fillStyle = "#CCCCCC";
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        ctx.drawImage(backgroundImg, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         ctx.save();
 
