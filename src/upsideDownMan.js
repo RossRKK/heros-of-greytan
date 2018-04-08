@@ -1,6 +1,6 @@
 class upsideDownMan extends Character {
 	constructor(oldCharacter) {
-		super();
+		super(oldCharacter.GRID_SIZE);
 		this.position = oldCharacter.position;
 		this.velocity = oldCharacter.velocity;
 		this.hp = oldCharacter.hp;
@@ -54,7 +54,7 @@ class upsideDownMan extends Character {
               } else {
                   ctx.fillStyle = "#ADFF2F";
               }
-            ctx.fillRect(this.position.x -10, this.position.y + level.GRID_SIZE, 5, GRID_SIZE * (this.engagedBuffer) / 500);
+            ctx.fillRect(this.position.x -10, this.position.y + this.GRID_SIZE, 5, this.GRID_SIZE * (this.engagedBuffer) / 500);
         }
 		if (this.flipFlag < 50) {
 			var zoom = document.createElement("img");
@@ -67,7 +67,7 @@ class upsideDownMan extends Character {
 
 class speedMan extends Character {
 	constructor(oldCharacter) {
-		super();
+		super(oldCharacter.GRID_SIZE);
 		this.position = oldCharacter.position;
 		this.velocity = oldCharacter.velocity;
 		this.hp = oldCharacter.hp;
@@ -82,11 +82,11 @@ class speedMan extends Character {
 		this.engaged = !this.engaged;
 
 		if (this.engaged) {
-			this.horizontalMaxSpeed = 10;
+			this.horizontalMaxSpeed = 20;
 			this.img.src = "textures/BobSpeedFeet.png";
 		}
 		else {
-			this.horizontalMaxSpeed = 5;
+			this.horizontalMaxSpeed = 10;
 			this.img.src = "textures/BobSpeed.png";
 		}
 
@@ -108,7 +108,7 @@ class speedMan extends Character {
 
 class grappleGuy extends Character {
 	constructor(oldCharacter) {
-		super();
+		super(oldCharacter.GRID_SIZE);
 		this.position = oldCharacter.position;
 		this.velocity = oldCharacter.velocity;
 		this.hp = oldCharacter.hp;
@@ -143,7 +143,7 @@ class grappleGuy extends Character {
 
 	move(level) {
 		if (this.engaged) {
-			if (Math.sqrt(Math.pow((this.position.x + this.width / 2) - this.target.x, 2) + Math.pow(this.target.y - (this.position.y + this.height / 2), 2)) < 1.25 * GRID_SIZE) {
+			if (Math.sqrt(Math.pow((this.position.x + this.width / 2) - this.target.x, 2) + Math.pow(this.target.y - (this.position.y + this.height / 2), 2)) < 1.25 * this.GRID_SIZE) {
 				this.cancelAction();
 			} else {
 				let m = ((this.position.y + this.height / 2) - this.target.y) / ((this.position.x + this.width / 2) - this.target.x);

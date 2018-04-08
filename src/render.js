@@ -46,7 +46,7 @@ var RenderEngine = function () {
     function drawLevel(level) {
         //draw a background
         ctx.fillStyle = level.background;
-        ctx.fillRect(0, 0, level.grid.length * level.GRID_SIZE, level.grid[0].length * GRID_SIZE);
+        ctx.fillRect(0, 0, level.grid.length * level.GRID_SIZE, level.grid[0].length * level.GRID_SIZE);
 
         //draw the grid
         drawGrid(level);
@@ -57,7 +57,7 @@ var RenderEngine = function () {
         for (let i = 0; i < level.grid.length; i++) {
             for (let j = 0; j < level.grid[i].length; j++) {
                 if (level.grid[i][j] !== null) {
-                  level.grid[i][j].draw(ctx, i, j);
+                  level.grid[i][j].draw(ctx, i, j, level);
                 }
             }
         }
@@ -70,7 +70,7 @@ var RenderEngine = function () {
         ctx.beginPath();
         for (let i = 0; i <= level.grid.length; i ++) {
             ctx.moveTo(i * level.GRID_SIZE, 0);
-            ctx.lineTo(i * level.GRID_SIZE, level.grid[0].length * GRID_SIZE);
+            ctx.lineTo(i * level.GRID_SIZE, level.grid[0].length * level.GRID_SIZE);
         }
 
         for (let i = 0; i <= level.grid[0].length; i ++) {
