@@ -9,16 +9,36 @@ class upsideDownMan extends Character {
 		this.img.src = "textures/BobUpsideDown.png";
 
 		this.engaged = false;
+		this.engagedBuffer = 500;
 	}
 
 	action() {
-		if (!this.engaged) {
+		if (!this.engaged && this.engagedBuffer === 500) {
 			this.gravity = -this.gravity;
+			this.engaged = true;
+			this.img.src = "textures/BobUpsideDownUpsideDown.png";
+		} else if (this.engaged) {
+			this.gravity = -this.gravity;
+			this.velocity.x = -this.velocity.x;
+			this.engaged = false;
+			this.img.src = this.img.src = "textures/BobUpsideDown.png";
 		}
-		this.engaged = true;
+	}
 
-		if (this.engaged) {this.img.src = "textures/BobUpsideDownUpsideDown.png";}
-		// else {this.img.src = "textures/BobUpsideDown.png";}
+	updatePosition(keyTracker, level) {
+		super.updatePosition(keyTracker, level);
+		if (this.engaged && this.engagedBuffer === 0) {
+			this.gravity = -this.gravity;
+			this.velocity.x = -this.velocity.x;
+			this.engaged = false;
+			this.img.src = "textures/BobUpsideDown.png";
+		}
+
+		if (this.engaged && this.engagedBuffer > 0) {
+			this.engagedBuffer -= 1;
+		} else if (!this.engaged && this.engagedBuffer < 500) {
+			this.engagedBuffer += 1;
+		}
 	}
 }
 
