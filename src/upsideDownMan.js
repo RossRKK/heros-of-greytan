@@ -118,12 +118,14 @@ class grappleGuy extends Character {
 		this.engaged = false;
 
 		this.grappleForce = 1;
+		this.grabFlag = 50;
 	}
 
 	action(level) {
 		if (this.engaged) {
 			this.cancelAction();
 		} else {
+			this.grabFlag = 0;
 			let mouse = Events.getMouseTracker();
 
 			if (isObstructed(level, mouse.x, mouse.y)) {
@@ -169,6 +171,16 @@ class grappleGuy extends Character {
 		}
 
 		super.move(level);
+	}
+
+	drawHUD(ctx, level) {
+		super.drawHUD(ctx, level);
+		if (this.grabFlag < 50) {
+			var grab = document.createElement("img");
+			grab.src = "textures/Grab!.png";
+			ctx.drawImage(grab, this.position.x - 30, this.position.y + 130);
+			this.grabFlag += 1;
+		}
 	}
 
 	draw(ctx) {
