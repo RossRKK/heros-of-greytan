@@ -12,37 +12,53 @@ var Game = function () {
 
   let name;
 
-  let level = getBasicLevel();  
+  let level = getBasicLevel();
+
+  let editing = false;
 
   function changeLevel(xClick, yClick) {
-      // alert(xClick);
-      // alert(yClick);
-      // alert(RenderEngine.getTranX());
-      if (xClick > RenderEngine.getTranX() && yClick > RenderEngine.getTranY()) {
-          let bounds = document.getElementById("canvas").getBoundingClientRect();
+      if (editing) {
+          // alert(xClick);
+          // alert(yClick);
+          // alert(RenderEngine.getTranX());
+          if (xClick > RenderEngine.getTranX() && yClick > RenderEngine.getTranY()) {
+              let bounds = document.getElementById("canvas").getBoundingClientRect();
 
-          xClick = xClick - RenderEngine.getTranX() - bounds.left;
-          yClick = yClick - RenderEngine.getTranY() - bounds.top;
+              xClick = xClick - RenderEngine.getTranX() - bounds.left;
+              yClick = yClick - RenderEngine.getTranY() - bounds.top;
 
-          blockXPos = Math.floor(xClick / level.GRID_SIZE);
-          blockYPos = Math.floor(yClick / level.GRID_SIZE);
+              blockXPos = Math.floor(xClick / level.GRID_SIZE);
+              blockYPos = Math.floor(yClick / level.GRID_SIZE);
 
-          /*alert(xClick);
-          alert(blockXPos);*/
+              /*alert(xClick);
+              alert(blockXPos);*/
 
-          level.grid[blockXPos][blockYPos] = grass;
+              level.grid[blockXPos][blockYPos] = grass;
+          }
       }
   }
 
+  grass = new GridCell("green", "textures/grass2.png", true, false);
+  water = new GridCell("green", "textures/water.png", false, true);
+  tower = new GridCell("green", "textures/tower.png", true, false);
+  tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+  upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
+  speedMask = new MaskCell("#68a2ff", false, false, "SM");
+  grappleMask = new MaskCell("68a2ff", false, false, "GG");
+
+  let blocks = [grass, water, tower, tree, upsideDownMan, speedMask, grappleMask];
+
+
+
   function getBasicLevel() {
-    grass = new GridCell("green", "textures/grass2.png", true, false);
-    water = new GridCell("green", "textures/water.png", false, true);
-    tower = new GridCell("green", "textures/tower.png", true, false);
-    tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
-    upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
-    speedMask = new MaskCell("#68a2ff", false, false, "SM");
-    grappleMask = new MaskCell("68a2ff", false, false, "GG");
-  
+      grass = new GridCell("green", "textures/grass2.png", true, false);
+      water = new GridCell("green", "textures/water.png", false, true);
+      tower = new GridCell("green", "textures/tower.png", true, false);
+      tree = new GridCell("#68a2ff", "textures/tree.png", true, false);
+      upsideDownMask = new MaskCell("#68a2ff", false, false, "UDM");
+      speedMask = new MaskCell("#68a2ff", false, false, "SM");
+      grappleMask = new MaskCell("68a2ff", false, false, "GG");
+
     let level = {
       background: "#68a2ff",
       GRID_SIZE: 60,
@@ -209,6 +225,9 @@ var Game = function () {
   return {
     init: init,
     getCharacter: function () { return character },
-    getLevel: function () { return level }
+    getLevel: function () { return level },
+    isEditing: function () {return editing },
+    toggleEdit: function () { editing = !editing },
+    getBlocks: function () { return blocks }
   }
 }();

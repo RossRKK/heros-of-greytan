@@ -39,6 +39,10 @@ var RenderEngine = function () {
 
         character.drawHUD(ctx, level);
         ctx.restore();
+
+        if (Game.isEditing()) {
+            drawBlockOptions();
+        }
     }
 
     var zoomFlag;
@@ -78,6 +82,19 @@ var RenderEngine = function () {
             ctx.lineTo(level.grid.length * level.GRID_SIZE, i * level.GRID_SIZE);
         }
         ctx.stroke();
+    }
+
+    function drawBlockOptions() {
+        const margin = 20;
+        ctx.fillStyle = "#919191";
+        ctx.fillRect(CANVAS_WIDTH - GRID_SIZE - (2 * margin), 0, GRID_SIZE + (2 * margin), CANVAS_HEIGHT);
+        for (let i = 0; i < Game.getBlocks().length; i++) {
+            try {
+            ctx.drawImage(Game.getBlocks()[i].img, CANVAS_WIDTH - GRID_SIZE - margin, (margin + (i * (GRID_SIZE + margin))), GRID_SIZE, GRID_SIZE);
+        } catch (Ex) {
+            //shut up
+        }
+        }
     }
 
     function drawDeath(character) {

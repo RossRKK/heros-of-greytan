@@ -56,6 +56,10 @@ var Events = function () {
 			case 32:
 				Game.getCharacter().action(Game.getLevel());
 				break;
+			case 101:
+				Game.toggleEdit();
+				console.log(Game.isEditing());
+				break;
 		}
 	}
 
