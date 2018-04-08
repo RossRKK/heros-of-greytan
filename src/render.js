@@ -36,6 +36,8 @@ var RenderEngine = function () {
         ctx.restore();
     }
 
+    var zoomFlag;
+
     function drawHUD(character) {
         if (character.hp < 500 || character.hpBuffer < 150) {
             if (character.hp > 250) {
@@ -47,11 +49,18 @@ var RenderEngine = function () {
             }
             ctx.fillRect(character.position.x, character.position.y - 10, GRID_SIZE * (character.hp / 500), 5);
         }
-        if (character.engaged && character.mask !== null) {
+        if (character.engaged && character.mask === "SM") {
             ctx.fillStyle = "#FF4500";
             ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (0.5));
+            zoom = document.createElement("img");
+            zoom.src = "textures/Zoom!.png";
+            if (zoomFlag) {
+                ctx.drawImage(zoom, character.position.x - 30, character.position.y + 130);
+            }
+            setTimeout(function(){zoomFlag = false}, 500);
         }
-        else if (!character.engaged && character.mask !== null) {
+        else if (!character.engaged && character.mask === "SM") {
+            zoomFlag = true;
             ctx.fillStyle =  "#ADFF2F";
             ctx.fillRect(character.position.x -10, character.position.y + GRID_SIZE, 5, GRID_SIZE * (0.5));
         }
